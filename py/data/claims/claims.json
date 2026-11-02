@@ -1,0 +1,407 @@
+{
+  "_meta": {
+    "description": "사후 클레임 시나리오 — 출항을 마친 과거 항차 5건과 선주 청구서. SOF는 data/golden/cases.json(TC-01b~05)의 표를 그대로 복사했고, D1은 각 항차의 base_date다.",
+    "owner_calc": "선주 타임시트의 입장(개시·종료·공제·반액·요율·청구액). 상대 시각 'D4 21:30'은 base_date 기준.",
+    "documents": "청구에 첨부된 서류. SOF_SIGNED.signed_by가 MASTER·AGENT·TERMINAL을 모두 포함해야 3자 서명 SOF로 인정",
+    "synthetic": true
+  },
+  "calls": [
+    {
+      "call_id": "ULS-2026-07-0042",
+      "case_id": "TC-01b",
+      "base_date": "2026-07-19",
+      "berth_id": "SK2B",
+      "operation": "DISCHARGE",
+      "cargo": "원유 (중동산, 가상)",
+      "quantity_bbl": 2000000,
+      "vessel": {
+        "name": "HANRIVER STAR",
+        "imo": "9901078",
+        "type": "VLCC",
+        "dwt": 300000,
+        "synthetic": true
+      },
+      "contract": {
+        "layer": "CHARTER_PARTY",
+        "form": "ASBATANKVOY",
+        "sk_role": "CHARTERER",
+        "counterparty": "Owner: Hanriver Star Shipping Ltd (가상)",
+        "laytime_hours": 36,
+        "notice_hours": 6,
+        "rate_usd_day": 120000,
+        "time_bar_days": 90,
+        "required_documents": [
+          "NOR",
+          "SOF_SIGNED",
+          "TIMESHEET",
+          "PUMPING_LOG",
+          "LOP"
+        ]
+      },
+      "context": {
+        "berth_id": "SK2B",
+        "daytime_rule": true,
+        "berth_free_on_arrival": true
+      },
+      "sof_text": "| D0 19:30 | 묘박지 도착, 투묘 |\n| D0 20:00 | NOR 제출·수령 |\n| D1 06:00 | 양묘, SBM으로 이동 시작 |\n| D1 08:00 | 계류 완료 |\n| D1 09:00 | 호스 연결 |\n| D1 09:30 | 양하 개시 |\n| D2 18:30 | 양하 완료 |\n| D2 19:30 | 호스 분리 |\n| D2 20:30 | 서류 완료, 이안 |"
+    },
+    {
+      "call_id": "ULS-2026-09-0117",
+      "case_id": "TC-02",
+      "base_date": "2026-09-14",
+      "berth_id": "SK8",
+      "operation": "DISCHARGE",
+      "cargo": "원유 (가상)",
+      "quantity_bbl": 700000,
+      "vessel": {
+        "name": "DONGHAE PIONEER",
+        "imo": "9901080",
+        "type": "Aframax",
+        "dwt": 105000,
+        "synthetic": true
+      },
+      "contract": {
+        "layer": "CHARTER_PARTY",
+        "form": "ASBATANKVOY",
+        "sk_role": "CHARTERER",
+        "counterparty": "Owner: Donghae Pioneer Maritime (가상)",
+        "laytime_hours": 30,
+        "notice_hours": 6,
+        "rate_usd_day": 55000,
+        "time_bar_days": 90,
+        "required_documents": [
+          "NOR",
+          "SOF_SIGNED",
+          "TIMESHEET",
+          "PUMPING_LOG",
+          "LOP"
+        ]
+      },
+      "context": {
+        "berth_id": "SK8",
+        "daytime_rule": true,
+        "berth_occupied_until": "D2 06:00"
+      },
+      "sof_text": "| D1 14:00 | 묘박지 도착, NOR 제출·수령 |\n| D1 20:00 | 통지시간 만료 → 레이타임 개시 (선석 점유 중) |\n| D2 06:30 | 도선사 승선, 양묘, 이동 시작 |\n| D2 08:00 | 접안 완료 (all fast, 주간) |\n| D2 09:00 | 호스 연결 |\n| D2 09:30 | 양하 개시 |\n| D3 05:30 | 양하 완료 (20h) |\n| D3 06:30 | 호스 분리 |"
+    },
+    {
+      "call_id": "ULS-2026-10-0031",
+      "case_id": "TC-03",
+      "base_date": "2026-10-05",
+      "berth_id": "SK2B",
+      "operation": "DISCHARGE",
+      "cargo": "원유 (부분 적재, 가상)",
+      "quantity_bbl": 1800000,
+      "vessel": {
+        "name": "ULSAN GLORY",
+        "imo": "9901092",
+        "type": "VLCC",
+        "dwt": 310000,
+        "synthetic": true
+      },
+      "contract": {
+        "layer": "CHARTER_PARTY",
+        "form": "ASBATANKVOY",
+        "sk_role": "CHARTERER",
+        "counterparty": "Owner: Ulsan Glory Maritime S.A. (가상)",
+        "laytime_hours": 36,
+        "notice_hours": 6,
+        "rate_usd_day": 120000,
+        "time_bar_days": 90,
+        "required_documents": [
+          "NOR",
+          "SOF_SIGNED",
+          "TIMESHEET",
+          "PUMPING_LOG",
+          "LOP"
+        ]
+      },
+      "context": {
+        "berth_id": "SK2B",
+        "daytime_rule": true
+      },
+      "sof_text": "| D1 10:00 | 묘박지 도착, NOR 제출·수령 |\n| D1 16:00 | 통지시간 만료 → 레이타임 개시 (대기) |\n| D2 19:00 | 앞 선박 이안. 야간이라 계류 불가, 계속 대기 |\n| D3 04:00 | 허용 레이타임 36h 소진 → **체선 개시 (묘박지에서)** |\n| D3 07:00 | 양묘, SBM 이동 시작 |\n| D3 09:00 | 계류 완료 |\n| D3 10:00 | 호스 연결 |\n| D3 10:30 | 양하 개시 |\n| D3 22:00 | 강풍으로 터미널 지시에 따라 양하 중단 |\n| D4 04:00 | 양하 재개 (중단 6h) |\n| D4 19:30 | 양하 완료 (실작업 27h) |\n| D4 20:30 | 호스 분리 |"
+    },
+    {
+      "call_id": "ULS-2026-10-0058",
+      "case_id": "TC-04",
+      "base_date": "2026-10-12",
+      "berth_id": "SK7",
+      "operation": "DISCHARGE",
+      "cargo": "제품유 (가상)",
+      "quantity_bbl": 690000,
+      "vessel": {
+        "name": "PACIFIC MERIDIAN",
+        "imo": "9901107",
+        "type": "Aframax",
+        "dwt": 100000,
+        "synthetic": true
+      },
+      "contract": {
+        "layer": "CHARTER_PARTY",
+        "form": "ASBATANKVOY",
+        "sk_role": "CHARTERER",
+        "counterparty": "Owner: Pacific Meridian Tankers Inc (가상)",
+        "laytime_hours": 30,
+        "notice_hours": 6,
+        "rate_usd_day": 50000,
+        "time_bar_days": 90,
+        "required_documents": [
+          "NOR",
+          "SOF_SIGNED",
+          "TIMESHEET",
+          "PUMPING_LOG",
+          "LOP"
+        ],
+        "pumping_warranty_hours": 24,
+        "pumping_warranty_psi": 100
+      },
+      "context": {
+        "berth_id": "SK7",
+        "daytime_rule": true,
+        "pumping_log": {
+          "avg_manifold_psi": 60,
+          "shore_restriction": false,
+          "evidence": "펌핑 로그 평균 60 psi · 터미널 '육상 배압 제한 없음' 확인서 TC-1013 (가상) · SOF 비고"
+        }
+      },
+      "sof_text": "| D1 06:00 | 묘박지 도착, NOR 제출·수령. 선석 비어 있음 |\n| D1 06:30 | 양묘, 이동 |\n| D1 08:00 | 접안 완료 (주간) |\n| D1 09:00 | 호스 연결 |\n| D1 09:30 | 양하 개시 |\n| D2 16:30 | 양하 완료 (31h). 펌핑 로그: 평균 매니폴드 압력 60 psi, 육상 배압 제한 없음 |\n| D2 17:30 | 호스 분리 |"
+    },
+    {
+      "call_id": "ULS-2026-10-0072",
+      "case_id": "TC-05",
+      "base_date": "2026-10-19",
+      "berth_id": "SK7",
+      "operation": "DISCHARGE",
+      "cargo": "케미컬 (가상)",
+      "quantity_bbl": 300000,
+      "vessel": {
+        "name": "GEOJE SPIRIT",
+        "imo": "9901119",
+        "type": "MR",
+        "dwt": 48000,
+        "synthetic": true
+      },
+      "contract": {
+        "layer": "CHARTER_PARTY",
+        "form": "ASBATANKVOY",
+        "sk_role": "CHARTERER",
+        "counterparty": "Owner: Geoje Spirit Chemical Carriers (가상)",
+        "laytime_hours": 24,
+        "notice_hours": 6,
+        "rate_usd_day": 26000,
+        "time_bar_days": 90,
+        "required_documents": [
+          "NOR",
+          "SOF_SIGNED",
+          "TIMESHEET",
+          "PUMPING_LOG",
+          "LOP"
+        ]
+      },
+      "context": {
+        "berth_id": "SK7",
+        "daytime_rule": true,
+        "nor_receipt": "RECEIVED"
+      },
+      "sof_text": "| D1 11:00 | NOR 송신 (항해 중, 항계 밖) |\n| D1 13:00 | 묘박지 도착, 투묘 |\n| D2 06:00 | 양묘, 이동 |\n| D2 07:30 | 접안 완료 (주간) |\n| D2 08:30 | 호스 연결 |\n| D2 09:00 | 양하 개시 |\n| D2 21:00 | 양하 완료 (12h) |\n| D2 22:00 | 호스 분리 |"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLM-2026-031",
+      "call_id": "ULS-2026-07-0042",
+      "claimant": "Owner: Hanriver Star Shipping Ltd (가상)",
+      "via": "Broker: Seoul Tanker Brokers (가상)",
+      "received_at": "2026-10-28T09:10",
+      "currency": "USD",
+      "owner_calc": {
+        "laytime_start": "D1 02:00",
+        "laytime_end": "D2 19:30",
+        "deductions": [
+          {
+            "category": "SHIFT",
+            "hours": 2.0
+          }
+        ],
+        "half_rate_hours": 0,
+        "rate_usd_day": 120000,
+        "demurrage_hours": 3.5,
+        "amount_usd": 17500.0
+      },
+      "documents": [
+        {
+          "type": "NOR"
+        },
+        {
+          "type": "SOF_SIGNED",
+          "signed_by": [
+            "MASTER",
+            "AGENT",
+            "TERMINAL"
+          ]
+        },
+        {
+          "type": "TIMESHEET"
+        },
+        {
+          "type": "PUMPING_LOG"
+        }
+      ],
+      "cover_note": "Please find attached our demurrage claim for MV HANRIVER STAR, Ulsan discharge July 2026, USD 17,500.00 with supporting documents."
+    },
+    {
+      "claim_id": "CLM-2026-034",
+      "call_id": "ULS-2026-09-0117",
+      "claimant": "Owner: Donghae Pioneer Maritime (가상)",
+      "via": "Broker: Seoul Tanker Brokers (가상)",
+      "received_at": "2026-10-06T14:20",
+      "currency": "USD",
+      "owner_calc": {
+        "laytime_start": "D1 20:00",
+        "laytime_end": "D3 06:30",
+        "deductions": [],
+        "half_rate_hours": 0,
+        "rate_usd_day": 55000,
+        "demurrage_hours": 4.5,
+        "amount_usd": 10312.5
+      },
+      "documents": [
+        {
+          "type": "NOR"
+        },
+        {
+          "type": "SOF_SIGNED",
+          "signed_by": [
+            "MASTER",
+            "AGENT",
+            "TERMINAL"
+          ]
+        },
+        {
+          "type": "TIMESHEET"
+        },
+        {
+          "type": "PUMPING_LOG"
+        }
+      ],
+      "cover_note": "Owners claim 4 hours 30 minutes demurrage at USD 55,000 pdpr, total USD 10,312.50. Time sheet attached."
+    },
+    {
+      "claim_id": "CLM-2026-036",
+      "call_id": "ULS-2026-10-0031",
+      "claimant": "Owner: Ulsan Glory Maritime S.A. (가상)",
+      "via": "Broker: Busan Chartering Partners (가상)",
+      "received_at": "2026-10-22T10:30",
+      "currency": "USD",
+      "owner_calc": {
+        "laytime_start": "D1 16:00",
+        "laytime_end": "D4 21:30",
+        "deductions": [],
+        "half_rate_hours": 0,
+        "rate_usd_day": 120000,
+        "demurrage_hours": 41.5,
+        "amount_usd": 207500.0
+      },
+      "documents": [
+        {
+          "type": "NOR"
+        },
+        {
+          "type": "SOF_SIGNED",
+          "signed_by": [
+            "MASTER",
+            "AGENT",
+            "TERMINAL"
+          ]
+        },
+        {
+          "type": "TIMESHEET"
+        },
+        {
+          "type": "PUMPING_LOG"
+        },
+        {
+          "type": "LOP",
+          "note": "Weather stoppage D3 22:00–D4 04:00 (terminal order)"
+        }
+      ],
+      "cover_note": "Owners' demurrage claim: 41 hours 30 minutes at USD 120,000 pdpr = USD 207,500.00. Hoses off per Master's time sheet 2130 hrs."
+    },
+    {
+      "claim_id": "CLM-2026-037",
+      "call_id": "ULS-2026-10-0058",
+      "claimant": "Owner: Pacific Meridian Tankers Inc (가상)",
+      "via": "Direct",
+      "received_at": "2026-10-27T16:05",
+      "currency": "USD",
+      "owner_calc": {
+        "laytime_start": "D1 08:00",
+        "laytime_end": "D2 17:30",
+        "deductions": [],
+        "half_rate_hours": 0,
+        "rate_usd_day": 50000,
+        "demurrage_hours": 3.5,
+        "amount_usd": 7291.67
+      },
+      "documents": [
+        {
+          "type": "NOR"
+        },
+        {
+          "type": "SOF_SIGNED",
+          "signed_by": [
+            "MASTER",
+            "AGENT",
+            "TERMINAL"
+          ]
+        },
+        {
+          "type": "TIMESHEET"
+        },
+        {
+          "type": "PUMPING_LOG"
+        }
+      ],
+      "cover_note": "Please arrange payment of demurrage USD 7,291.67 (3h30m). Pumping log enclosed."
+    },
+    {
+      "claim_id": "CLM-2026-038",
+      "call_id": "ULS-2026-10-0072",
+      "claimant": "Owner: Geoje Spirit Chemical Carriers (가상)",
+      "via": "Broker: Busan Chartering Partners (가상)",
+      "received_at": "2026-10-30T11:45",
+      "currency": "USD",
+      "owner_calc": {
+        "laytime_start": "D1 17:00",
+        "laytime_end": "D2 22:00",
+        "deductions": [
+          {
+            "category": "SHIFT",
+            "hours": 1.5
+          }
+        ],
+        "half_rate_hours": 0,
+        "rate_usd_day": 26000,
+        "demurrage_hours": 3.5,
+        "amount_usd": 3791.67
+      },
+      "documents": [
+        {
+          "type": "NOR"
+        },
+        {
+          "type": "SOF_SIGNED",
+          "signed_by": [
+            "MASTER",
+            "AGENT"
+          ]
+        },
+        {
+          "type": "TIMESHEET"
+        }
+      ],
+      "cover_note": "NOR tendered 1100 hrs and accepted by agents. Laytime commenced 1700 hrs. Demurrage USD 3,791.67."
+    }
+  ]
+}

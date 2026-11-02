@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "source": "대리점이 서명용으로 보낸 SOF(선장·대리점 작성). 터미널 기록(SEAGATE Cargo Working)·AIS와 대조할 대상이다. diffs는 데모용으로 심어 둔 불일치.",
+    "rule": "ENG-RECONCILE"
+  },
+  "reports": {
+    "ULS-2026-11-0101": {
+      "from": "Hanbada Shipping Agency (가상)",
+      "signed_by": [
+        "MASTER",
+        "AGENT"
+      ],
+      "diffs": [
+        {
+          "type": "ALL_FAST",
+          "delta_minutes": -20,
+          "note": "SOF는 07:40 계류 완료로 기재"
+        },
+        {
+          "type": "HOSES_DISCONNECTED",
+          "delta_minutes": 30,
+          "note": "SOF는 호스 분리를 30분 늦게 기재"
+        }
+      ]
+    },
+    "ULS-2026-11-0102": {
+      "from": "Hanbada Shipping Agency (가상)",
+      "signed_by": [
+        "MASTER",
+        "AGENT"
+      ],
+      "diffs": []
+    },
+    "ULS-2026-11-0103": {
+      "from": "Taehwa Marine Agency (가상)",
+      "signed_by": [
+        "MASTER",
+        "AGENT"
+      ],
+      "diffs": []
+    },
+    "ULS-2026-11-0104": {
+      "from": "Taehwa Marine Agency (가상)",
+      "signed_by": [
+        "MASTER",
+        "AGENT"
+      ],
+      "diffs": [
+        {
+          "type": "ANCHORED",
+          "delta_minutes": -50,
+          "note": "SOF는 투묘를 12:10(NOR 송신 시각)으로 기재 — AIS 투묘는 13:00. 그대로 받으면 첫 NOR이 유효해 보인다"
+        }
+      ]
+    },
+    "ULS-2026-11-0105": {
+      "from": "Hanbada Shipping Agency (가상)",
+      "signed_by": [
+        "MASTER",
+        "AGENT"
+      ],
+      "diffs": []
+    },
+    "ULS-2026-11-0106": {
+      "from": "Daewang Shipping (가상)",
+      "signed_by": [
+        "MASTER",
+        "AGENT"
+      ],
+      "diffs": []
+    }
+  }
+}

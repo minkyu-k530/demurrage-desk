@@ -1,0 +1,125 @@
+{
+  "_meta": {
+    "source": "입항 노미네이션(SEAGATE Order List·Berth Rez) + 대리점 ETA 통지(72/48/24h). shore_rate_m3h는 생산조정팀 탱크 배정에서 오는 육상 수용률 제약.",
+    "synthetic": true,
+    "product": "product = 제품 코드(resources.json products). 선석 라인·탱크군·전환 시간을 고른다 (v3)"
+  },
+  "calls": [
+    {
+      "call_id": "ULS-2026-11-0101",
+      "vessel_id": "V1",
+      "operation": "DISCHARGE",
+      "cargo": "원유 A (중동산, 가상)",
+      "cargo_class": "CRUDE",
+      "product": "CRUDE",
+      "quantity_bbl": 2000000,
+      "shore_rate_m3h": 9000,
+      "agent": "Hanbada Shipping Agency (가상)",
+      "eta_updates": [
+        {
+          "issued_at": "2026-10-31T02:00",
+          "eta": "2026-11-03T02:00",
+          "source": "AGENT 72h 통지"
+        }
+      ]
+    },
+    {
+      "call_id": "ULS-2026-11-0102",
+      "vessel_id": "V2",
+      "operation": "DISCHARGE",
+      "cargo": "원유 B (중동산, 가상)",
+      "cargo_class": "CRUDE",
+      "product": "CRUDE",
+      "quantity_bbl": 1950000,
+      "agent": "Hanbada Shipping Agency (가상)",
+      "eta_updates": [
+        {
+          "issued_at": "2026-11-01T06:00",
+          "eta": "2026-11-04T05:30",
+          "source": "AGENT 72h 통지"
+        }
+      ],
+      "shore_rate_m3h": 10000
+    },
+    {
+      "call_id": "ULS-2026-11-0103",
+      "vessel_id": "V3",
+      "operation": "DISCHARGE",
+      "cargo": "원유 C (가상)",
+      "cargo_class": "CRUDE",
+      "product": "CRUDE",
+      "quantity_bbl": 750000,
+      "agent": "Taehwa Marine Agency (가상)",
+      "eta_updates": [
+        {
+          "issued_at": "2026-10-31T15:00",
+          "eta": "2026-11-03T15:00",
+          "source": "AGENT 72h 통지"
+        }
+      ],
+      "shore_rate_m3h": 5000
+    },
+    {
+      "call_id": "ULS-2026-11-0104",
+      "vessel_id": "V4",
+      "operation": "DISCHARGE",
+      "cargo": "원유 C (가상)",
+      "cargo_class": "CRUDE",
+      "product": "CRUDE",
+      "quantity_bbl": 760000,
+      "agent": "Taehwa Marine Agency (가상)",
+      "eta_updates": [
+        {
+          "issued_at": "2026-11-01T16:00",
+          "eta": "2026-11-04T16:00",
+          "source": "AGENT 72h 통지"
+        },
+        {
+          "issued_at": "2026-11-04T06:00",
+          "eta": "2026-11-04T13:00",
+          "source": "AGENT ETA 갱신 (속력 증가)"
+        }
+      ],
+      "nor_anomaly": {
+        "tender_offset_minutes": -50,
+        "retender_offset_minutes": 15,
+        "note": "선장이 묘박지 도착 50분 전 항해 중에 NOR 송신, 회신 후 도착 15분 뒤 재제출"
+      }
+    },
+    {
+      "call_id": "ULS-2026-11-0105",
+      "vessel_id": "V5",
+      "operation": "DISCHARGE",
+      "cargo": "원유 D (가상)",
+      "cargo_class": "CRUDE",
+      "product": "CRUDE",
+      "quantity_bbl": 980000,
+      "agent": "Hanbada Shipping Agency (가상)",
+      "eta_updates": [
+        {
+          "issued_at": "2026-11-02T03:00",
+          "eta": "2026-11-05T03:00",
+          "source": "AGENT 72h 통지"
+        }
+      ]
+    },
+    {
+      "call_id": "ULS-2026-11-0106",
+      "vessel_id": "V6",
+      "operation": "LOAD",
+      "cargo": "경유 (수출, 가상)",
+      "cargo_class": "OIL",
+      "product": "GASOIL",
+      "quantity_bbl": 300000,
+      "shore_rate_m3h": 3500,
+      "agent": "Daewang Shipping (가상)",
+      "eta_updates": [
+        {
+          "issued_at": "2026-10-31T21:00",
+          "eta": "2026-11-03T21:00",
+          "source": "AGENT 72h 통지"
+        }
+      ]
+    }
+  ]
+}

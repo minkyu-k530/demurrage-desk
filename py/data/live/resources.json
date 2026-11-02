@@ -1,0 +1,590 @@
+{
+ "_meta": {
+  "description": "v3 자원·제약 입력(P4~P10): 조석·파고·시정, 탱크군·공유 배관, 예선·도선·계류 감독, 제품·라인 전환, 선박 검사(Vetting). [가정]은 임의로 둔 운영 기준값, [가상]은 데모용으로 만든 데이터다. 실제 연동처: KHOA 조석예보, KMA 해양기상(파고·시정), SEAGATE 원유재고예측·탱크 배정, 예선·도선 배정 시스템, SK 해상안전팀 Vetting.",
+  "base_rule": "기준 시나리오(BASE)에서는 새 제약이 결과를 바꾸지 않도록 비구속 기본값을 둔다 — 조위 부족 선박 없음, 탱크 여유가 모든 화물보다 큼, 배관 한도 = 두 SBM 동시 최대 유량, 예선 풀 ≥ 동시 최대 소요, 계류 감독 SBM별 1인, 안개·너울 없음, 모든 선박 승인 완료. 시나리오(S04~S17)에서 값을 바꿔 구속시킨다.",
+  "synthetic": true
+ },
+ "berths": {
+  "SK2B": {
+   "tidal_access": false,
+   "products": [
+    "CRUDE"
+   ],
+   "line": "TL-SBM",
+   "manifolds": [
+    {
+     "id": "SK2B-C",
+     "products": [
+      "CRUDE"
+     ],
+     "initial": "CRUDE"
+    }
+   ],
+   "note": "외해 SBM — 수심 27 m라 조석 창 불필요 [가정]"
+  },
+  "SK3B": {
+   "tidal_access": false,
+   "products": [
+    "CRUDE"
+   ],
+   "line": "TL-SBM",
+   "manifolds": [
+    {
+     "id": "SK3B-C",
+     "products": [
+      "CRUDE"
+     ],
+     "initial": "CRUDE"
+    }
+   ],
+   "note": "외해 SBM [가정]"
+  },
+  "SK8": {
+   "tidal_access": true,
+   "products": [
+    "CRUDE",
+    "GASOIL",
+    "NAPHTHA",
+    "JET"
+   ],
+   "line": "TL-SK8",
+   "manifolds": [
+    {
+     "id": "SK8-C",
+     "products": [
+      "CRUDE"
+     ],
+     "initial": "CRUDE"
+    },
+    {
+     "id": "SK8-P",
+     "products": [
+      "GASOIL",
+      "NAPHTHA",
+      "JET"
+     ],
+     "initial": "GASOIL"
+    }
+   ],
+   "note": "항내 부두 — 조위가 부족분만큼 오를 때 입항 이동 가능(조석 접근) [가정]. 원유 라인·제품 라인 분리 [가정]"
+  },
+  "SK7": {
+   "tidal_access": true,
+   "products": [
+    "GASOIL",
+    "NAPHTHA",
+    "JET",
+    "CHEM"
+   ],
+   "line": "TL-SK7",
+   "manifolds": [
+    {
+     "id": "SK7-P",
+     "products": [
+      "GASOIL",
+      "NAPHTHA",
+      "JET",
+      "CHEM"
+     ],
+     "initial": "GASOIL"
+    }
+   ],
+   "note": "항내 제품 부두 [가정]"
+  }
+ },
+ "tide": {
+  "source": "KHOA 조석예보(가상) — 울산 기준 4분조 조화상수 흉내",
+  "datum": "약최저저조면(가정)",
+  "epoch": "2026-11-03T00:00",
+  "z0_m": 0.38,
+  "constituents": [
+   {
+    "name": "M2",
+    "amp_m": 0.18,
+    "period_h": 12.4206,
+    "phase_deg": 80
+   },
+   {
+    "name": "S2",
+    "amp_m": 0.08,
+    "period_h": 12.0,
+    "phase_deg": 110
+   },
+   {
+    "name": "K1",
+    "amp_m": 0.07,
+    "period_h": 23.9345,
+    "phase_deg": 200
+   },
+   {
+    "name": "O1",
+    "amp_m": 0.05,
+    "period_h": 25.8193,
+    "phase_deg": 160
+   }
+  ],
+  "check_step_min": 15,
+  "rule": "ULS-TIDE-UKC"
+ },
+ "wave": {
+  "source": "KMA 해양기상부이(가상) — 유의파고. 풍파 = 0.30 + 0.008×풍속² (m) [가정] + 너울",
+  "model": {
+   "base_m": 0.3,
+   "wind_coef": 0.008
+  },
+  "limits": {
+   "sbm_mooring_m": 2.5,
+   "sbm_ops_m": 3.0
+  },
+  "swell": [],
+  "rule": "ULS-WAVE-LIMIT"
+ },
+ "visibility": {
+  "source": "KMA 해양기상관측·시정계(가상)",
+  "threshold_km": 1.0,
+  "start": "2026-11-03T00:00",
+  "step_min": 60,
+  "km": [
+   7.5,
+   7.4,
+   7.3,
+   7.1,
+   6.8,
+   4.2,
+   5.4,
+   6.6,
+   4.8,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   17.0,
+   15.3,
+   13.5,
+   6.8,
+   7.1,
+   7.3,
+   7.4,
+   7.5,
+   7.4,
+   7.3,
+   7.1,
+   6.8,
+   6.0,
+   4.2,
+   5.4,
+   6.6,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   4.0,
+   3.7,
+   3.4,
+   3.2,
+   3.0,
+   2.8,
+   2.7,
+   2.7,
+   2.7,
+   2.8,
+   2.9,
+   2.9,
+   2.9,
+   3.0,
+   3.1,
+   3.2,
+   3.2,
+   3.5,
+   3.7,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   17.0,
+   15.3,
+   13.5,
+   6.8,
+   7.1,
+   7.3,
+   7.4,
+   7.5,
+   7.4,
+   7.3,
+   7.1,
+   6.8,
+   6.4,
+   4.8,
+   6.0,
+   4.2,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   17.0,
+   15.3,
+   13.5,
+   6.8,
+   7.1,
+   7.3,
+   7.4,
+   7.5,
+   7.4,
+   7.3,
+   7.1,
+   6.8,
+   5.4,
+   6.6,
+   4.8,
+   6.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   17.0,
+   15.3,
+   13.5,
+   6.8,
+   7.1,
+   7.3,
+   7.4,
+   7.5,
+   7.4,
+   7.3,
+   7.1,
+   6.8,
+   4.2,
+   5.4,
+   6.6,
+   4.8,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   17.0,
+   15.3,
+   13.5,
+   6.8,
+   7.1,
+   7.3,
+   7.4,
+   7.5,
+   7.4,
+   7.3,
+   7.1,
+   6.8,
+   6.0,
+   4.2,
+   5.4,
+   6.6,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   18.0,
+   17.0,
+   15.3,
+   13.5,
+   6.8,
+   7.1,
+   7.3,
+   7.4
+  ],
+  "advisories": [],
+  "rule": "ULS-FOG-CLOSURE"
+ },
+ "tanks": [
+  {
+   "id": "TF-CRUDE-A",
+   "label": "SBM 원유 탱크군 A (가상, 16기)",
+   "products": [
+    "CRUDE"
+   ],
+   "berths": [
+    "SK2B",
+    "SK3B"
+   ],
+   "capacity_m3": 2000000,
+   "max_m3": 1900000,
+   "min_m3": 150000,
+   "level0_m3": 700000,
+   "draw_m3h": 2600,
+   "rundown_m3h": 0,
+   "note": "draw = 정유 공정(CDU) 원유 투입 [가정]. max = 안전 충전 상한 95%"
+  },
+  {
+   "id": "TF-CRUDE-B",
+   "label": "부두 원유 탱크군 B (가상, 6기)",
+   "products": [
+    "CRUDE"
+   ],
+   "berths": [
+    "SK8"
+   ],
+   "capacity_m3": 800000,
+   "max_m3": 760000,
+   "min_m3": 60000,
+   "level0_m3": 300000,
+   "draw_m3h": 1200,
+   "rundown_m3h": 0,
+   "note": "SK8 원유 라인 전용 [가정]"
+  },
+  {
+   "id": "TF-PRODUCT",
+   "label": "경유·항공유 제품 탱크군 (가상)",
+   "products": [
+    "GASOIL",
+    "JET"
+   ],
+   "berths": [
+    "SK7",
+    "SK8"
+   ],
+   "capacity_m3": 420000,
+   "max_m3": 400000,
+   "min_m3": 30000,
+   "level0_m3": 150000,
+   "draw_m3h": 0,
+   "rundown_m3h": 300,
+   "note": "rundown = 공정 생산 유입 [가정]. 수출 선적이 꺼내 간다"
+  },
+  {
+   "id": "TF-NAPHTHA",
+   "label": "나프타 탱크군 (가상)",
+   "products": [
+    "NAPHTHA"
+   ],
+   "berths": [
+    "SK7",
+    "SK8"
+   ],
+   "capacity_m3": 300000,
+   "max_m3": 285000,
+   "min_m3": 20000,
+   "level0_m3": 80000,
+   "draw_m3h": 400,
+   "rundown_m3h": 0,
+   "note": "draw = 석유화학 공정 투입 [가정]"
+  }
+ ],
+ "tank_rule": {
+  "berth_min_ratio": 0.5,
+  "rule": "TANK-ULLAGE"
+ },
+ "lines": [
+  {
+   "id": "TL-SBM",
+   "label": "SBM 원유 주배관 (SK2B·SK3B 공유)",
+   "berths": [
+    "SK2B",
+    "SK3B"
+   ],
+   "capacity_m3h": 24000,
+   "allocation": "FIRST_BERTHED",
+   "note": "BASE 한도 = 두 SBM 동시 최대 유량(비구속). 육상 부스터 펌프·헤더 공유 [가정]"
+  },
+  {
+   "id": "TL-SK8",
+   "label": "SK8 부두 배관",
+   "berths": [
+    "SK8"
+   ],
+   "capacity_m3h": 7500,
+   "allocation": "FIRST_BERTHED",
+   "note": "선석 배관 한도와 같음"
+  },
+  {
+   "id": "TL-SK7",
+   "label": "SK7 부두 배관",
+   "berths": [
+    "SK7"
+   ],
+   "capacity_m3h": 4000,
+   "allocation": "FIRST_BERTHED",
+   "note": "선석 배관 한도와 같음"
+  }
+ ],
+ "marine": {
+  "tugs": {
+   "fleet": 16,
+   "label": "울산항 예선 풀 중 SK 부두 배정 가능 척수 [가정]",
+   "requirements": {
+    "VLCC": {
+     "SBM": 4,
+     "PIER": 4
+    },
+    "Suezmax": {
+     "SBM": 4,
+     "PIER": 3
+    },
+    "Aframax": {
+     "SBM": 3,
+     "PIER": 3
+    },
+    "MR": {
+     "SBM": 2,
+     "PIER": 2
+    }
+   },
+   "default": 2,
+   "calendar": [
+    {
+     "id": "TUG-1102",
+     "issued_at": "2026-11-02T18:00",
+     "from": "2026-11-04T20:00",
+     "to": "2026-11-05T08:00",
+     "available": 13,
+     "reason": "야간 당직 축소 (가상)"
+    }
+   ],
+   "rule": "MAR-TUG-REQ"
+  },
+  "pilots": {
+   "pool": 8,
+   "label": "울산항 도선사 중 SK 부두 동시 배정 가능 인원 [가정]",
+   "requirements": {
+    "VLCC": 2
+   },
+   "default": 1,
+   "calendar": [],
+   "lead_minutes": 120,
+   "rule": "MAR-PILOT-REQ"
+  },
+  "mooring_master": {
+   "berths": [
+    "SK2B",
+    "SK3B"
+   ],
+   "enabled": false,
+   "count": 1,
+   "note": "BASE는 SBM별 계류 감독 2인 [가정]. 1인 공용이면 SK2B·SK3B 계류·해지 작업이 겹칠 수 없다",
+   "rule": "MAR-MOORING-MASTER"
+  }
+ },
+ "products": {
+  "labels": {
+   "CRUDE": "원유",
+   "GASOIL": "경유",
+   "NAPHTHA": "나프타",
+   "JET": "항공유",
+   "CHEM": "화학제품"
+  },
+  "changeover_minutes": [
+   {
+    "from": "GASOIL",
+    "to": "NAPHTHA",
+    "minutes": 180
+   },
+   {
+    "from": "NAPHTHA",
+    "to": "GASOIL",
+    "minutes": 150
+   },
+   {
+    "from": "GASOIL",
+    "to": "JET",
+    "minutes": 180
+   },
+   {
+    "from": "JET",
+    "to": "GASOIL",
+    "minutes": 60
+   },
+   {
+    "from": "NAPHTHA",
+    "to": "JET",
+    "minutes": 240
+   },
+   {
+    "from": "JET",
+    "to": "NAPHTHA",
+    "minutes": 120
+   },
+   {
+    "from": "CRUDE",
+    "to": "NAPHTHA",
+    "minutes": 480
+   },
+   {
+    "from": "CRUDE",
+    "to": "GASOIL",
+    "minutes": 360
+   }
+  ],
+  "default_changeover_minutes": 180,
+  "sampling_minutes": {
+   "CRUDE": 0,
+   "GASOIL": 0,
+   "JET": 45,
+   "NAPHTHA": 90,
+   "CHEM": 60
+  },
+  "note": "같은 제품군끼리는 전환 없음(원유 등급 분리는 탱크에서) [가정]. 전환은 호스 연결 후 라인 치환, 그 뒤 first-foot 샘플 분석이 끝나야 본 하역 [가정]. 원유·경유는 분석을 하역과 병행(0분)",
+  "rules": [
+   "PROD-BERTH",
+   "PROD-CHANGEOVER",
+   "PROD-SAMPLING"
+  ]
+ },
+ "vetting": {
+  "source": "SK 해상안전팀 선박 승인(SIRE·터미널 수용 검토, 가상)",
+  "calls": {
+   "ULS-2026-11-0101": {
+    "status": "APPROVED",
+    "cleared_at": "2026-10-29T10:00",
+    "updates": []
+   },
+   "ULS-2026-11-0102": {
+    "status": "APPROVED",
+    "cleared_at": "2026-10-30T14:00",
+    "updates": []
+   },
+   "ULS-2026-11-0103": {
+    "status": "APPROVED",
+    "cleared_at": "2026-10-31T09:00",
+    "updates": []
+   },
+   "ULS-2026-11-0104": {
+    "status": "CONDITIONAL",
+    "cleared_at": "2026-11-01T15:00",
+    "condition": "주간 접안 조건부 승인 (선령 18년)",
+    "updates": []
+   },
+   "ULS-2026-11-0105": {
+    "status": "APPROVED",
+    "cleared_at": "2026-10-31T16:00",
+    "updates": []
+   },
+   "ULS-2026-11-0106": {
+    "status": "APPROVED",
+    "cleared_at": "2026-10-30T11:00",
+    "updates": []
+   }
+  },
+  "rule": "VET-CLEARANCE"
+ }
+}

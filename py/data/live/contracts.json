@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "source": "용선계약 recap(CP Part I) 또는 원유·제품 매매계약(GTC)의 레이타임 조항. SEAGATE에 없는 데이터 — 트레이딩·용선 조직에서 받아야 한다.",
+    "layer": "CHARTER_PARTY = SK가 용선주로 선주에게 직접 지급 / SALES_CONTRACT = 매매계약 상대방에게 지급·청구",
+    "synthetic": true
+  },
+  "contracts": {
+    "ULS-2026-11-0101": {"layer": "CHARTER_PARTY", "form": "ASBATANKVOY", "sk_role": "CHARTERER", "counterparty": "Owner: Taehwa Tankers (가상)",
+                          "laytime_hours": 36, "notice_hours": 6, "rate_usd_day": 120000, "pumping_warranty_hours": 24, "pumping_warranty_psi": 100,
+                          "time_bar_days": 90, "required_documents": ["NOR", "SOF_SIGNED", "TIMESHEET", "PUMPING_LOG", "LOP"]},
+    "ULS-2026-11-0102": {"layer": "SALES_CONTRACT", "form": "GTC_DES", "sk_role": "BUYER_DES", "counterparty": "Seller: Gulf Crude Trading (가상)",
+                          "laytime_hours": 36, "notice_hours": 6, "rate_usd_day": 115000, "time_bar_days": 90,
+                          "required_documents": ["NOR", "SOF_SIGNED", "TIMESHEET", "CP_RATE_EVIDENCE"]},
+    "ULS-2026-11-0103": {"layer": "CHARTER_PARTY", "form": "ASBATANKVOY", "sk_role": "CHARTERER", "counterparty": "Owner: East Sea Tankers (가상)",
+                          "laytime_hours": 30, "notice_hours": 6, "rate_usd_day": 55000, "time_bar_days": 90,
+                          "required_documents": ["NOR", "SOF_SIGNED", "TIMESHEET"]},
+    "ULS-2026-11-0104": {"layer": "SALES_CONTRACT", "form": "GTC_DES", "sk_role": "BUYER_DES", "counterparty": "Seller: Pacific Oil Supply (가상)",
+                          "laytime_hours": 30, "notice_hours": 6, "rate_usd_day": 58000, "time_bar_days": 90,
+                          "required_documents": ["NOR", "SOF_SIGNED", "TIMESHEET", "CP_RATE_EVIDENCE"]},
+    "ULS-2026-11-0105": {"layer": "CHARTER_PARTY", "form": "ASBATANKVOY", "sk_role": "CHARTERER", "counterparty": "Owner: Aegean Bulk Tankers (가상)",
+                          "laytime_hours": 36, "notice_hours": 6, "rate_usd_day": 78000, "time_bar_days": 90,
+                          "required_documents": ["NOR", "SOF_SIGNED", "TIMESHEET", "PUMPING_LOG"]},
+    "ULS-2026-11-0106": {"layer": "SALES_CONTRACT", "form": "GTC_FOB", "sk_role": "SELLER_FOB", "counterparty": "Buyer: Singapore Fuels (가상)",
+                          "laytime_hours": 24, "notice_hours": 6, "rate_usd_day": 32000, "time_bar_days": 90,
+                          "required_documents": ["NOR", "SOF_SIGNED", "TIMESHEET"]}
+  }
+}

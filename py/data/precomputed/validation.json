@@ -1,0 +1,5005 @@
+{
+ "computed_at": "2026-11-02T16:34:35",
+ "source": "precomputed",
+ "policies": [
+  {
+   "id": "CURRENT_RULE",
+   "label": "현업 Rule (SEAGATE v1 유지)",
+   "desc": "선종별 FCFS로 만든 기준 계획(VLCC·수에즈막스→SBM, 아프라막스→SK8, 제품선→SK7)을 끝까지 유지한다. 재계획 없음."
+  },
+  {
+   "id": "FCFS",
+   "label": "FCFS (도착 순)",
+   "desc": "결정 시점마다 아직 이동 전인 선박을 그때 알던 도착 시각 순으로 세우고, 가장 빨리 접안할 수 있는 적합 선석 맨 뒤에 붙인다."
+  },
+  {
+   "id": "RATE",
+   "label": "체선료율 우선",
+   "desc": "요율이 높은 선박부터 같은 방식으로 붙인다."
+  },
+  {
+   "id": "LAYTIME_RISK",
+   "label": "레이타임 임박 우선",
+   "desc": "NOR + 통지시간 + 허용 레이타임(대기가 모두 산입될 때 체선에 들어가는 시각)이 이른 선박부터 붙인다."
+  },
+  {
+   "id": "OPTIMIZER",
+   "label": "Optimizer (완전 탐색)",
+   "desc": "결정 시점마다 그때 알던 정보로 선석 배정·순서·탱크 레버의 모든 조합을 비교해 예상 체선료가 가장 작은 안을 고른다."
+  },
+  {
+   "id": "RISK_AWARE",
+   "label": "Risk-aware Optimizer",
+   "desc": "같은 탐색을 기준 예측 + 오차 시나리오(폭풍 종료 ±3h, 도착 전 선박 ETA ±3h)의 가중 평균 체선료로 평가한다(기준 40%, 나머지 균등)."
+  },
+  {
+   "id": "AGENT_HITL",
+   "label": "Agent + 사람 승인",
+   "desc": "에이전트가 영향 설명 항목에 낸 1순위 옵션을 담당자가 생성 시각에 승인했다고 가정한다(작업함과 같은 경로)."
+  }
+ ],
+ "decision_points": [
+  {
+   "t": "2026-11-03T00:00",
+   "trigger": "INIT",
+   "label": "기준 계획 수립 (t0)"
+  },
+  {
+   "t": "2026-11-04T06:00",
+   "trigger": "ETA",
+   "label": "JANGSAENGPO GRACE ETA 갱신 → 11/04 13:00"
+  },
+  {
+   "t": "2026-11-04T08:00",
+   "trigger": "FORECAST",
+   "label": "동해남부 앞바다 풍랑주의보 예상: 11/04 17시~11/05 09시 북동풍 15~23 m/s"
+  },
+  {
+   "t": "2026-11-04T10:00",
+   "trigger": "CONSTRAINT",
+   "label": "SK3 Buoy 점검 조기 완료: 11/05 07:00부터 사용 가능"
+  }
+ ],
+ "replay": [
+  {
+   "policy": "CURRENT_RULE",
+   "label": "현업 Rule (SEAGATE v1 유지)",
+   "total_usd": 251749.99,
+   "waiting_h": 109.0,
+   "violations": 0,
+   "violation_details": [],
+   "plan_changes": 0,
+   "utilization": {
+    "SK2B": 0.798,
+    "SK3B": 0.0,
+    "SK8": 0.363,
+    "SK7": 0.133
+   },
+   "compute_ms": 5.2,
+   "per_call": [
+    {
+     "call_id": "ULS-2026-11-0101",
+     "vessel": "TAEHWA HARMONY",
+     "berth_id": "SK2B",
+     "seq": 1,
+     "amount_usd": 46583.33,
+     "demurrage_h": 15.817,
+     "waiting_h": 4.0,
+     "etb": "2026-11-03T08:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0102",
+     "vessel": "MUNSU PEARL",
+     "berth_id": "SK2B",
+     "seq": 2,
+     "amount_usd": 110208.33,
+     "demurrage_h": 23.0,
+     "waiting_h": 32.0,
+     "etb": "2026-11-05T15:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0105",
+     "vessel": "BANGEOJIN TRADER",
+     "berth_id": "SK2B",
+     "seq": 3,
+     "amount_usd": 84445.83,
+     "demurrage_h": 25.983,
+     "waiting_h": 51.0,
+     "etb": "2026-11-07T08:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0103",
+     "vessel": "GANJEOLGOT DAWN",
+     "berth_id": "SK8",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T16:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0104",
+     "vessel": "JANGSAENGPO GRACE",
+     "berth_id": "SK8",
+     "seq": 2,
+     "amount_usd": 10512.5,
+     "demurrage_h": 4.35,
+     "waiting_h": 22.0,
+     "etb": "2026-11-05T12:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0106",
+     "vessel": "GANGDONG BREEZE",
+     "berth_id": "SK7",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T22:30"
+    }
+   ],
+   "decisions": [
+    {
+     "t": "2026-11-03T00:00",
+     "trigger": "INIT",
+     "summary": "계획 유지 (현업 Rule은 재계획하지 않음)",
+     "moves": [],
+     "levers": [],
+     "projected_usd": null
+    },
+    {
+     "t": "2026-11-04T06:00",
+     "trigger": "ETA",
+     "summary": "계획 유지 (현업 Rule은 재계획하지 않음)",
+     "moves": [],
+     "levers": [],
+     "projected_usd": null
+    },
+    {
+     "t": "2026-11-04T08:00",
+     "trigger": "FORECAST",
+     "summary": "계획 유지 (현업 Rule은 재계획하지 않음)",
+     "moves": [],
+     "levers": [],
+     "projected_usd": null
+    },
+    {
+     "t": "2026-11-04T10:00",
+     "trigger": "CONSTRAINT",
+     "summary": "계획 유지 (현업 Rule은 재계획하지 않음)",
+     "moves": [],
+     "levers": [],
+     "projected_usd": null
+    }
+   ]
+  },
+  {
+   "policy": "FCFS",
+   "label": "FCFS (도착 순)",
+   "total_usd": 155325.0,
+   "waiting_h": 66.0,
+   "violations": 0,
+   "violation_details": [],
+   "plan_changes": 2,
+   "utilization": {
+    "SK2B": 0.533,
+    "SK3B": 0.265,
+    "SK8": 0.363,
+    "SK7": 0.133
+   },
+   "compute_ms": 11.6,
+   "per_call": [
+    {
+     "call_id": "ULS-2026-11-0101",
+     "vessel": "TAEHWA HARMONY",
+     "berth_id": "SK2B",
+     "seq": 1,
+     "amount_usd": 46583.33,
+     "demurrage_h": 15.817,
+     "waiting_h": 4.0,
+     "etb": "2026-11-03T08:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0105",
+     "vessel": "BANGEOJIN TRADER",
+     "berth_id": "SK2B",
+     "seq": 2,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 10.5,
+     "etb": "2026-11-05T15:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0102",
+     "vessel": "MUNSU PEARL",
+     "berth_id": "SK3B",
+     "seq": 1,
+     "amount_usd": 98229.17,
+     "demurrage_h": 20.5,
+     "waiting_h": 29.5,
+     "etb": "2026-11-05T13:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0103",
+     "vessel": "GANJEOLGOT DAWN",
+     "berth_id": "SK8",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T16:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0104",
+     "vessel": "JANGSAENGPO GRACE",
+     "berth_id": "SK8",
+     "seq": 2,
+     "amount_usd": 10512.5,
+     "demurrage_h": 4.35,
+     "waiting_h": 22.0,
+     "etb": "2026-11-05T12:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0106",
+     "vessel": "GANGDONG BREEZE",
+     "berth_id": "SK7",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T22:30"
+    }
+   ],
+   "decisions": [
+    {
+     "t": "2026-11-03T00:00",
+     "trigger": "INIT",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 167799.99
+    },
+    {
+     "t": "2026-11-04T06:00",
+     "trigger": "ETA",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 167799.99
+    },
+    {
+     "t": "2026-11-04T08:00",
+     "trigger": "FORECAST",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 242041.66
+    },
+    {
+     "t": "2026-11-04T10:00",
+     "trigger": "CONSTRAINT",
+     "summary": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+     "moves": [
+      "BANGEOJIN TRADER: SK2B #3 → SK2B #2",
+      "MUNSU PEARL: SK2B #2 → SK3B #1"
+     ],
+     "levers": [],
+     "projected_usd": 145616.66
+    }
+   ]
+  },
+  {
+   "policy": "RATE",
+   "label": "체선료율 우선",
+   "total_usd": 269326.39,
+   "waiting_h": 107.0,
+   "violations": 0,
+   "violation_details": [],
+   "plan_changes": 2,
+   "utilization": {
+    "SK2B": 0.533,
+    "SK3B": 0.265,
+    "SK8": 0.439,
+    "SK7": 0.133
+   },
+   "compute_ms": 10.6,
+   "per_call": [
+    {
+     "call_id": "ULS-2026-11-0101",
+     "vessel": "TAEHWA HARMONY",
+     "berth_id": "SK2B",
+     "seq": 1,
+     "amount_usd": 46583.33,
+     "demurrage_h": 15.817,
+     "waiting_h": 4.0,
+     "etb": "2026-11-03T08:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0105",
+     "vessel": "BANGEOJIN TRADER",
+     "berth_id": "SK2B",
+     "seq": 2,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 10.5,
+     "etb": "2026-11-05T15:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0102",
+     "vessel": "MUNSU PEARL",
+     "berth_id": "SK3B",
+     "seq": 1,
+     "amount_usd": 98229.17,
+     "demurrage_h": 20.5,
+     "waiting_h": 29.5,
+     "etb": "2026-11-05T13:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0104",
+     "vessel": "JANGSAENGPO GRACE",
+     "berth_id": "SK8",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-04T14:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0103",
+     "vessel": "GANJEOLGOT DAWN",
+     "berth_id": "SK8",
+     "seq": 2,
+     "amount_usd": 124513.89,
+     "demurrage_h": 54.333,
+     "waiting_h": 63.0,
+     "etb": "2026-11-06T07:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0106",
+     "vessel": "GANGDONG BREEZE",
+     "berth_id": "SK7",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T22:30"
+    }
+   ],
+   "decisions": [
+    {
+     "t": "2026-11-03T00:00",
+     "trigger": "INIT",
+     "summary": "JANGSAENGPO GRACE: SK8 #2 → SK8 #1; GANJEOLGOT DAWN: SK8 #1 → SK8 #2",
+     "moves": [
+      "JANGSAENGPO GRACE: SK8 #2 → SK8 #1",
+      "GANJEOLGOT DAWN: SK8 #1 → SK8 #2"
+     ],
+     "levers": [],
+     "projected_usd": 255074.3
+    },
+    {
+     "t": "2026-11-04T06:00",
+     "trigger": "ETA",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 248199.3
+    },
+    {
+     "t": "2026-11-04T08:00",
+     "trigger": "FORECAST",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 358459.72
+    },
+    {
+     "t": "2026-11-04T10:00",
+     "trigger": "CONSTRAINT",
+     "summary": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+     "moves": [
+      "BANGEOJIN TRADER: SK2B #3 → SK2B #2",
+      "MUNSU PEARL: SK2B #2 → SK3B #1"
+     ],
+     "levers": [],
+     "projected_usd": 262034.72
+    }
+   ]
+  },
+  {
+   "policy": "LAYTIME_RISK",
+   "label": "레이타임 임박 우선",
+   "total_usd": 155325.0,
+   "waiting_h": 66.0,
+   "violations": 0,
+   "violation_details": [],
+   "plan_changes": 2,
+   "utilization": {
+    "SK2B": 0.533,
+    "SK3B": 0.265,
+    "SK8": 0.363,
+    "SK7": 0.133
+   },
+   "compute_ms": 9.6,
+   "per_call": [
+    {
+     "call_id": "ULS-2026-11-0101",
+     "vessel": "TAEHWA HARMONY",
+     "berth_id": "SK2B",
+     "seq": 1,
+     "amount_usd": 46583.33,
+     "demurrage_h": 15.817,
+     "waiting_h": 4.0,
+     "etb": "2026-11-03T08:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0105",
+     "vessel": "BANGEOJIN TRADER",
+     "berth_id": "SK2B",
+     "seq": 2,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 10.5,
+     "etb": "2026-11-05T15:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0102",
+     "vessel": "MUNSU PEARL",
+     "berth_id": "SK3B",
+     "seq": 1,
+     "amount_usd": 98229.17,
+     "demurrage_h": 20.5,
+     "waiting_h": 29.5,
+     "etb": "2026-11-05T13:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0103",
+     "vessel": "GANJEOLGOT DAWN",
+     "berth_id": "SK8",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T16:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0104",
+     "vessel": "JANGSAENGPO GRACE",
+     "berth_id": "SK8",
+     "seq": 2,
+     "amount_usd": 10512.5,
+     "demurrage_h": 4.35,
+     "waiting_h": 22.0,
+     "etb": "2026-11-05T12:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0106",
+     "vessel": "GANGDONG BREEZE",
+     "berth_id": "SK7",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T22:30"
+    }
+   ],
+   "decisions": [
+    {
+     "t": "2026-11-03T00:00",
+     "trigger": "INIT",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 167799.99
+    },
+    {
+     "t": "2026-11-04T06:00",
+     "trigger": "ETA",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 167799.99
+    },
+    {
+     "t": "2026-11-04T08:00",
+     "trigger": "FORECAST",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 242041.66
+    },
+    {
+     "t": "2026-11-04T10:00",
+     "trigger": "CONSTRAINT",
+     "summary": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+     "moves": [
+      "BANGEOJIN TRADER: SK2B #3 → SK2B #2",
+      "MUNSU PEARL: SK2B #2 → SK3B #1"
+     ],
+     "levers": [],
+     "projected_usd": 145616.66
+    }
+   ]
+  },
+  {
+   "policy": "OPTIMIZER",
+   "label": "Optimizer (완전 탐색)",
+   "total_usd": 108741.67,
+   "waiting_h": 63.5,
+   "violations": 0,
+   "violation_details": [],
+   "plan_changes": 1,
+   "utilization": {
+    "SK2B": 0.539,
+    "SK3B": 0.129,
+    "SK8": 0.363,
+    "SK7": 0.133
+   },
+   "compute_ms": 32.4,
+   "per_call": [
+    {
+     "call_id": "ULS-2026-11-0101",
+     "vessel": "TAEHWA HARMONY",
+     "berth_id": "SK2B",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 4.0,
+     "etb": "2026-11-03T08:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0102",
+     "vessel": "MUNSU PEARL",
+     "berth_id": "SK2B",
+     "seq": 2,
+     "amount_usd": 98229.17,
+     "demurrage_h": 20.5,
+     "waiting_h": 29.5,
+     "etb": "2026-11-05T13:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0105",
+     "vessel": "BANGEOJIN TRADER",
+     "berth_id": "SK3B",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 8.0,
+     "etb": "2026-11-05T13:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0103",
+     "vessel": "GANJEOLGOT DAWN",
+     "berth_id": "SK8",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T16:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0104",
+     "vessel": "JANGSAENGPO GRACE",
+     "berth_id": "SK8",
+     "seq": 2,
+     "amount_usd": 10512.5,
+     "demurrage_h": 4.35,
+     "waiting_h": 22.0,
+     "etb": "2026-11-05T12:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0106",
+     "vessel": "GANGDONG BREEZE",
+     "berth_id": "SK7",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T22:30"
+    }
+   ],
+   "decisions": [
+    {
+     "t": "2026-11-03T00:00",
+     "trigger": "INIT",
+     "summary": "TAEHWA HARMONY 수입 탱크에 TK-104 추가 배정 (육상 수용률 9,000 → 12,000 m3/h)",
+     "moves": [],
+     "levers": [
+      "TAEHWA HARMONY 수입 탱크에 TK-104 추가 배정 (육상 수용률 9,000 → 12,000 m3/h)"
+     ],
+     "projected_usd": 158716.66
+    },
+    {
+     "t": "2026-11-04T06:00",
+     "trigger": "ETA",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 158716.66
+    },
+    {
+     "t": "2026-11-04T08:00",
+     "trigger": "FORECAST",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 185979.16
+    },
+    {
+     "t": "2026-11-04T10:00",
+     "trigger": "CONSTRAINT",
+     "summary": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+     "moves": [
+      "BANGEOJIN TRADER: SK2B #3 → SK3B #1"
+     ],
+     "levers": [],
+     "projected_usd": 101533.33
+    }
+   ]
+  },
+  {
+   "policy": "RISK_AWARE",
+   "label": "Risk-aware Optimizer",
+   "total_usd": 108741.67,
+   "waiting_h": 63.5,
+   "violations": 0,
+   "violation_details": [],
+   "plan_changes": 1,
+   "utilization": {
+    "SK2B": 0.539,
+    "SK3B": 0.129,
+    "SK8": 0.363,
+    "SK7": 0.133
+   },
+   "compute_ms": 97.7,
+   "per_call": [
+    {
+     "call_id": "ULS-2026-11-0101",
+     "vessel": "TAEHWA HARMONY",
+     "berth_id": "SK2B",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 4.0,
+     "etb": "2026-11-03T08:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0102",
+     "vessel": "MUNSU PEARL",
+     "berth_id": "SK2B",
+     "seq": 2,
+     "amount_usd": 98229.17,
+     "demurrage_h": 20.5,
+     "waiting_h": 29.5,
+     "etb": "2026-11-05T13:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0105",
+     "vessel": "BANGEOJIN TRADER",
+     "berth_id": "SK3B",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 8.0,
+     "etb": "2026-11-05T13:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0103",
+     "vessel": "GANJEOLGOT DAWN",
+     "berth_id": "SK8",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T16:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0104",
+     "vessel": "JANGSAENGPO GRACE",
+     "berth_id": "SK8",
+     "seq": 2,
+     "amount_usd": 10512.5,
+     "demurrage_h": 4.35,
+     "waiting_h": 22.0,
+     "etb": "2026-11-05T12:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0106",
+     "vessel": "GANGDONG BREEZE",
+     "berth_id": "SK7",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T22:30"
+    }
+   ],
+   "decisions": [
+    {
+     "t": "2026-11-03T00:00",
+     "trigger": "INIT",
+     "summary": "TAEHWA HARMONY 수입 탱크에 TK-104 추가 배정 (육상 수용률 9,000 → 12,000 m3/h)",
+     "moves": [],
+     "levers": [
+      "TAEHWA HARMONY 수입 탱크에 TK-104 추가 배정 (육상 수용률 9,000 → 12,000 m3/h)"
+     ],
+     "projected_usd": 158716.66
+    },
+    {
+     "t": "2026-11-04T06:00",
+     "trigger": "ETA",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 158716.66
+    },
+    {
+     "t": "2026-11-04T08:00",
+     "trigger": "FORECAST",
+     "summary": "변경 없음",
+     "moves": [],
+     "levers": [],
+     "projected_usd": 185979.16
+    },
+    {
+     "t": "2026-11-04T10:00",
+     "trigger": "CONSTRAINT",
+     "summary": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+     "moves": [
+      "BANGEOJIN TRADER: SK2B #3 → SK3B #1"
+     ],
+     "levers": [],
+     "projected_usd": 101533.33
+    }
+   ]
+  },
+  {
+   "policy": "AGENT_HITL",
+   "label": "Agent + 사람 승인",
+   "total_usd": 108741.67,
+   "waiting_h": 63.5,
+   "violations": 0,
+   "violation_details": [],
+   "plan_changes": 2,
+   "utilization": {
+    "SK2B": 0.402,
+    "SK3B": 0.265,
+    "SK8": 0.363,
+    "SK7": 0.133
+   },
+   "compute_ms": 340.2,
+   "per_call": [
+    {
+     "call_id": "ULS-2026-11-0101",
+     "vessel": "TAEHWA HARMONY",
+     "berth_id": "SK2B",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 4.0,
+     "etb": "2026-11-03T08:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0105",
+     "vessel": "BANGEOJIN TRADER",
+     "berth_id": "SK2B",
+     "seq": 2,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 8.0,
+     "etb": "2026-11-05T13:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0102",
+     "vessel": "MUNSU PEARL",
+     "berth_id": "SK3B",
+     "seq": 1,
+     "amount_usd": 98229.17,
+     "demurrage_h": 20.5,
+     "waiting_h": 29.5,
+     "etb": "2026-11-05T13:00"
+    },
+    {
+     "call_id": "ULS-2026-11-0103",
+     "vessel": "GANJEOLGOT DAWN",
+     "berth_id": "SK8",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T16:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0104",
+     "vessel": "JANGSAENGPO GRACE",
+     "berth_id": "SK8",
+     "seq": 2,
+     "amount_usd": 10512.5,
+     "demurrage_h": 4.35,
+     "waiting_h": 22.0,
+     "etb": "2026-11-05T12:30"
+    },
+    {
+     "call_id": "ULS-2026-11-0106",
+     "vessel": "GANGDONG BREEZE",
+     "berth_id": "SK7",
+     "seq": 1,
+     "amount_usd": 0.0,
+     "demurrage_h": 0,
+     "waiting_h": 0.0,
+     "etb": "2026-11-03T22:30"
+    }
+   ],
+   "decisions": [
+    {
+     "t": "2026-11-04T08:00",
+     "trigger": "AGENT",
+     "summary": "TAEHWA HARMONY 수입 탱크에 TK-104 추가 배정",
+     "moves": [],
+     "levers": [
+      "TAEHWA HARMONY 수입 탱크에 TK-104 추가 배정 (육상 수용률 9,000 → 12,000 m3/h)"
+     ],
+     "projected_usd": 185979.16,
+     "item_id": "IMP-1104-0800"
+    },
+    {
+     "t": "2026-11-04T10:00",
+     "trigger": "AGENT",
+     "summary": "MUNSU PEARL: SK2B #2 → SK3B #1",
+     "moves": [
+      "MUNSU PEARL: SK2B #2 → SK3B #1"
+     ],
+     "levers": [],
+     "projected_usd": 101533.33,
+     "item_id": "IMP-1104-1000"
+    }
+   ]
+  }
+ ],
+ "hindsight": {
+  "total_usd": 108741.67,
+  "waiting_h": 63.5,
+  "per_call": [
+   {
+    "call_id": "ULS-2026-11-0101",
+    "vessel": "TAEHWA HARMONY",
+    "berth_id": "SK2B",
+    "seq": 1,
+    "amount_usd": 0.0,
+    "demurrage_h": 0,
+    "waiting_h": 4.0,
+    "etb": "2026-11-03T08:00"
+   },
+   {
+    "call_id": "ULS-2026-11-0102",
+    "vessel": "MUNSU PEARL",
+    "berth_id": "SK2B",
+    "seq": 2,
+    "amount_usd": 98229.17,
+    "demurrage_h": 20.5,
+    "waiting_h": 29.5,
+    "etb": "2026-11-05T13:00"
+   },
+   {
+    "call_id": "ULS-2026-11-0105",
+    "vessel": "BANGEOJIN TRADER",
+    "berth_id": "SK3B",
+    "seq": 1,
+    "amount_usd": 0.0,
+    "demurrage_h": 0,
+    "waiting_h": 8.0,
+    "etb": "2026-11-05T13:00"
+   },
+   {
+    "call_id": "ULS-2026-11-0103",
+    "vessel": "GANJEOLGOT DAWN",
+    "berth_id": "SK8",
+    "seq": 1,
+    "amount_usd": 0.0,
+    "demurrage_h": 0,
+    "waiting_h": 0.0,
+    "etb": "2026-11-03T16:30"
+   },
+   {
+    "call_id": "ULS-2026-11-0104",
+    "vessel": "JANGSAENGPO GRACE",
+    "berth_id": "SK8",
+    "seq": 2,
+    "amount_usd": 10512.5,
+    "demurrage_h": 4.35,
+    "waiting_h": 22.0,
+    "etb": "2026-11-05T12:30"
+   },
+   {
+    "call_id": "ULS-2026-11-0106",
+    "vessel": "GANGDONG BREEZE",
+    "berth_id": "SK7",
+    "seq": 1,
+    "amount_usd": 0.0,
+    "demurrage_h": 0,
+    "waiting_h": 0.0,
+    "etb": "2026-11-03T22:30"
+   }
+  ],
+  "violations": 0,
+  "plan": "BANGEOJIN TRADER: SK2B #3 → SK3B #1; TAEHWA HARMONY 수입 탱크에 TK-104 추가 배정 (육상 수용률 9,000 → 12,000 m3/h)",
+  "compute_ms": 25.0,
+  "note": "미래(실제 도착·관측 풍속·실제 부두제약)를 모두 아는 사후 최적 — 실현 불가능한 하한. 정보 가치의 상한을 보여 준다."
+ },
+ "headline": {
+  "best_policy": "OPTIMIZER",
+  "best_label": "Optimizer (완전 탐색)",
+  "vs": "CURRENT_RULE",
+  "base_usd": 251749.99,
+  "best_usd": 108741.67,
+  "saving_usd": 143008.32,
+  "saving_pct": 56.8,
+  "hindsight_usd": 108741.67,
+  "text": "Optimizer (완전 탐색)이(가) 현업 Rule 대비 실제 체선료를 $143,008(56.8%) 줄였다 ($251,750 → $108,742). 결정 시점마다 그때 알던 정보만 썼다. 같은 결과: Risk-aware Optimizer, Agent + 사람 승인. 사후 최적(미래를 아는 하한)은 $108,742. [가상 시나리오]"
+ },
+ "no_lookahead": "각 결정 시점 t에는 t까지 발행된 ETA·예보·부두제약·자원 통보(예선 배정·검사 승인 갱신·안개 주의보·너울 예보)와 t까지의 관측·실제 사건만 쓴다(KnownEnv). 채점만 실제 세계(truth)로 한다.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "정상",
+   "modeled": true,
+   "desc": "폭풍 없음 — 관측·예보 모두 평온(6~10 m/s). SK3B 정비·탱크 제약·ETA는 기준과 같다.",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 167799.99,
+     "waiting_h": 96.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 83354.16,
+     "waiting_h": 48.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 163753.47,
+     "waiting_h": 75.25,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 83354.16,
+     "waiting_h": 48.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 74270.83,
+     "waiting_h": 48.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 74270.83,
+     "waiting_h": 48.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $74,271 — 현업 Rule $167,800 대비 $93,529 절감",
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 93529.16
+  },
+  {
+   "id": "S02",
+   "title": "선박 동시 도착",
+   "modeled": true,
+   "desc": "BANGEOJIN TRADER가 MUNSU PEARL과 같은 11/04 05:30에 도착 — SBM 대상 2척이 동시에 대기.",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 321624.99,
+     "waiting_h": 130.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 171520.83,
+     "waiting_h": 87.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 285522.22,
+     "waiting_h": 128.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 171520.83,
+     "waiting_h": 87.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 116812.5,
+     "waiting_h": 85.0,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 116812.5,
+     "waiting_h": 85.0,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $116,812 — 현업 Rule $321,625 대비 $204,812 절감",
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 204812.49
+  },
+  {
+   "id": "S03",
+   "title": "고체선료 선박 후착",
+   "modeled": true,
+   "desc": "나중에 오는 BANGEOJIN TRADER의 요율을 180,000달러/일로 올림(먼저 온 MUNSU PEARL 115,000).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 362179.16,
+     "waiting_h": 109.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 155325.0,
+     "waiting_h": 66.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 594951.39,
+     "waiting_h": 176.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 155325.0,
+     "waiting_h": 66.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 108741.67,
+     "waiting_h": 63.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 108741.67,
+     "waiting_h": 63.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $108,742 — 현업 Rule $362,179 대비 $253,437 절감",
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 253437.49
+  },
+  {
+   "id": "S04",
+   "title": "Tide Window",
+   "modeled": true,
+   "desc": "흘수 제한 선박이 조위가 높은 시간에만 접안 — JANGSAENGPO GRACE 흘수 14.8 → 16.7 m. SK8(수심 18 m)은 조위 0.37 m 이상인 동안에만 입항 이동(ULS-TIDE-UKC, KHOA 조석 가상).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 255374.99,
+     "waiting_h": 110.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 158950.0,
+     "waiting_h": 67.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 269326.39,
+     "waiting_h": 107.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 158950.0,
+     "waiting_h": 67.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 112366.67,
+     "waiting_h": 65.0,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 112366.67,
+     "waiting_h": 65.0,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $112,367 — 현업 Rule $255,375 대비 $143,008 절감",
+   "focus": [
+    "TIDE_UKC"
+   ],
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 143008.32
+  },
+  {
+   "id": "S05",
+   "title": "Tank Shortage",
+   "modeled": true,
+   "desc": "원유 탱크군 A 재고 적체(초기 1,400,000 m3, 여유 500,000 m3) + CDU 감산(투입 2,600 → 2,000 m3/h). 여유가 화물 절반보다 작으면 접안 보류, 상한에 닿으면 하역 속도 = 공정 투입 속도(TANK-ULLAGE).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 327854.16,
+     "waiting_h": 109.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 315875.0,
+     "waiting_h": 106.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 429876.39,
+     "waiting_h": 147.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 315875.0,
+     "waiting_h": 106.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 269291.67,
+     "waiting_h": 106.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 269291.67,
+     "waiting_h": 106.5,
+     "plan_changes": 0,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $269,292 — 현업 Rule $327,854 대비 $58,562 절감",
+   "focus": [
+    "TANK_ULLAGE"
+   ],
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 58562.49
+  },
+  {
+   "id": "S06",
+   "title": "Pipeline Conflict",
+   "modeled": true,
+   "desc": "공유 배관을 쓰는 두 선박의 하역이 겹침 — SK3B 정비 없음(두 SBM 가용) + 공유 주배관 TL-SBM 한도 15,000 m3/h. 먼저 접안한 선박이 우선, 나중 선박은 잔여 용량(LINE-SHARED-CAP).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 133842.36,
+     "waiting_h": 37.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 133842.36,
+     "waiting_h": 37.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 247843.75,
+     "waiting_h": 78.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 133842.36,
+     "waiting_h": 37.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 92689.58,
+     "waiting_h": 34.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 92689.58,
+     "waiting_h": 34.5,
+     "plan_changes": 0,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $92,690 — 현업 Rule $133,842 대비 $41,153 절감",
+   "focus": [
+    "LINE_SHARED"
+   ],
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 41152.78
+  },
+  {
+   "id": "S07",
+   "title": "Weather Disruption",
+   "modeled": true,
+   "desc": "기준 시나리오 그대로 — 11/04 08:00 예보 발행, 11/04 17시~11/05 09시 폭풍(관측은 예보보다 1시간 길다).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 251749.99,
+     "waiting_h": 109.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 155325.0,
+     "waiting_h": 66.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 269326.39,
+     "waiting_h": 107.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 155325.0,
+     "waiting_h": 66.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 108741.67,
+     "waiting_h": 63.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 108741.67,
+     "waiting_h": 63.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $108,742 — 현업 Rule $251,750 대비 $143,008 절감",
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 143008.32
+  },
+  {
+   "id": "S08",
+   "title": "ETA Delay",
+   "modeled": true,
+   "desc": "11/03 18:00 통지로 MUNSU PEARL ETA 11/04 05:30 → 17:30 (12h 지연).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 194249.99,
+     "waiting_h": 97.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 97825.0,
+     "waiting_h": 54.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 211826.39,
+     "waiting_h": 95.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 97825.0,
+     "waiting_h": 54.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 51241.67,
+     "waiting_h": 51.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 51241.67,
+     "waiting_h": 51.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $51,242 — 현업 Rule $194,250 대비 $143,008 절감",
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 143008.32
+  },
+  {
+   "id": "S09",
+   "title": "ETA Early Arrival",
+   "modeled": true,
+   "desc": "11/04 00:00 통지로 BANGEOJIN TRADER ETA 11/05 03:00 → 11/04 15:00 (12h 조기).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 290749.99,
+     "waiting_h": 121.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 155325.0,
+     "waiting_h": 78.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 269326.39,
+     "waiting_h": 119.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 155325.0,
+     "waiting_h": 78.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 108741.67,
+     "waiting_h": 75.5,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 108741.67,
+     "waiting_h": 75.5,
+     "plan_changes": 3,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $108,742 — 현업 Rule $290,750 대비 $182,008 절감",
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 182008.32
+  },
+  {
+   "id": "S10",
+   "title": "Equipment Failure",
+   "modeled": true,
+   "desc": "대리 표현: SK2B 호스 손상으로 11/05 10:00~22:00 사용 불가(같은 시각 부두제약 통보). 하역 중 설비 고장은 sim이 지원하지 않아 선석 사용불가 창으로 표현했다.",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 418395.83,
+     "waiting_h": 149.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 155325.0,
+     "waiting_h": 82.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 269326.39,
+     "waiting_h": 123.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 155325.0,
+     "waiting_h": 82.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 108741.67,
+     "waiting_h": 82.5,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 108741.67,
+     "waiting_h": 82.5,
+     "plan_changes": 3,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $108,742 — 현업 Rule $418,396 대비 $309,654 절감",
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 309654.16
+  },
+  {
+   "id": "S11",
+   "title": "Emergency Export",
+   "modeled": true,
+   "desc": "대리 표현: 긴급 경유 수출선 HWAAM SWIFT(MR, 가상)가 11/04 09:00 도착. 우선순위를 요율 90,000달러/일로 표현했다(실제로는 출하 기한·위약 조건이 필요).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 286812.49,
+     "waiting_h": 135.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 239929.17,
+     "waiting_h": 111.0,
+     "plan_changes": 4,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 290849.31,
+     "waiting_h": 133.75,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 239929.17,
+     "waiting_h": 111.0,
+     "plan_changes": 4,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 143804.17,
+     "waiting_h": 89.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 143804.17,
+     "waiting_h": 89.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $143,804 — 현업 Rule $286,812 대비 $143,008 절감",
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 143008.32
+  },
+  {
+   "id": "S12",
+   "title": "High Berth Occupancy",
+   "modeled": true,
+   "desc": "VLCC ONSAN TITAN(11/04 18:00 도착)과 아프라막스 SEOSAENG PIONEER(11/05 02:00 도착)를 추가 — SBM·SK8 점유율이 올라간다.",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 603762.49,
+     "waiting_h": 231.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 295429.16,
+     "waiting_h": 156.75,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 470638.89,
+     "waiting_h": 224.5,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 295429.16,
+     "waiting_h": 156.75,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 237387.5,
+     "waiting_h": 154.25,
+     "plan_changes": 4,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 237387.5,
+     "waiting_h": 154.25,
+     "plan_changes": 4,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $237,388 — 현업 Rule $603,762 대비 $366,375 절감",
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 366374.99
+  },
+  {
+   "id": "S13",
+   "title": "예선·도선 부족",
+   "modeled": true,
+   "desc": "11/04 06:00~11/05 18:00 SK 배정 가능 예선 16 → 3척(11/03 12:00 통보) + SBM 계류 감독 1인 공용. VLCC·수에즈막스(4척 필요)는 그동안 접·이안 불가, 겹치는 이동은 먼저 움직이는 선박부터(MAR-TUG-REQ).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 418395.83,
+     "waiting_h": 149.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 259145.83,
+     "waiting_h": 102.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 373147.22,
+     "waiting_h": 143.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 259145.83,
+     "waiting_h": 102.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 212562.5,
+     "waiting_h": 102.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 212562.5,
+     "waiting_h": 102.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $212,562 — 현업 Rule $418,396 대비 $205,833 절감",
+   "focus": [
+    "TUG_POOL",
+    "MOORING_MASTER"
+   ],
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 205833.33
+  },
+  {
+   "id": "S14",
+   "title": "제품 전환",
+   "modeled": true,
+   "desc": "JANGSAENGPO GRACE 화물을 나프타 수입으로 바꿈 — SK8 제품 라인(경유 잔류) 치환 180분 뒤 first-foot 샘플 분석 90분이 끝나야 본 하역(PROD-CHANGEOVER·PROD-SAMPLING).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 261416.66,
+     "waiting_h": 109.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 164991.67,
+     "waiting_h": 66.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 275609.72,
+     "waiting_h": 107.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 164991.67,
+     "waiting_h": 66.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 118408.34,
+     "waiting_h": 63.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 118408.34,
+     "waiting_h": 63.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $118,408 — 현업 Rule $261,417 대비 $143,008 절감",
+   "focus": [
+    "PRODUCT_CHANGEOVER",
+    "PRODUCT_SAMPLING"
+   ],
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 143008.32
+  },
+  {
+   "id": "S15",
+   "title": "시정 불량(안개)",
+   "modeled": true,
+   "desc": "11/03 13~20시 시정 1 km 미만(10:00 안개 주의보) — 위험물 운반선 접·이안 통제(ULS-FOG-CLOSURE). 하역은 계속된다.",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 334138.88,
+     "waiting_h": 143.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 237713.89,
+     "waiting_h": 100.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 269326.39,
+     "waiting_h": 107.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 237713.89,
+     "waiting_h": 100.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 191130.56,
+     "waiting_h": 97.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 191130.56,
+     "waiting_h": 97.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $191,131 — 현업 Rule $334,139 대비 $143,008 절감",
+   "focus": [
+    "FOG_CLOSURE"
+   ],
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 143008.32
+  },
+  {
+   "id": "S16",
+   "title": "선박 검사·승인 대기",
+   "modeled": true,
+   "desc": "TAEHWA HARMONY 승인(Vetting) 보류 — 11/03 05:00 통보로 승인 예정 06:00 → 13:00. 승인 전 입항 이동 불가(VET-CLEARANCE). SK 측 승인 지연이라 대기는 레이타임 산입.",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 447145.83,
+     "waiting_h": 156.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 184075.0,
+     "waiting_h": 89.5,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 298076.39,
+     "waiting_h": 130.5,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 184075.0,
+     "waiting_h": 89.5,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 159325.0,
+     "waiting_h": 75.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 159325.0,
+     "waiting_h": 75.0,
+     "plan_changes": 2,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $159,325 — 현업 Rule $447,146 대비 $287,821 절감",
+   "focus": [
+    "VETTING"
+   ],
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 287820.83
+  },
+  {
+   "id": "S17",
+   "title": "너울 유입(파고)",
+   "modeled": true,
+   "desc": "폭풍 뒤 너울 +1.4 m가 11/05 06~17시 유입(11/04 20:00 예보). SBM 유의파고 2.5 m 이상 계류 불가·3.0 m 이상 하역 중단(ULS-WAVE-LIMIT).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 266333.33,
+     "waiting_h": 111.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 169908.33,
+     "waiting_h": 70.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 283909.72,
+     "waiting_h": 111.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 169908.33,
+     "waiting_h": 70.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 118325.0,
+     "waiting_h": 67.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 118325.0,
+     "waiting_h": 67.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $118,325 — 현업 Rule $266,333 대비 $148,008 절감",
+   "focus": [
+    "WAVE_LIMIT"
+   ],
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 148008.33
+  }
+ ],
+ "constraint_scenarios": [
+  {
+   "id": "S04",
+   "title": "Tide Window",
+   "modeled": true,
+   "desc": "흘수 제한 선박이 조위가 높은 시간에만 접안 — JANGSAENGPO GRACE 흘수 14.8 → 16.7 m. SK8(수심 18 m)은 조위 0.37 m 이상인 동안에만 입항 이동(ULS-TIDE-UKC, KHOA 조석 가상).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 255374.99,
+     "waiting_h": 110.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 158950.0,
+     "waiting_h": 67.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 269326.39,
+     "waiting_h": 107.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 158950.0,
+     "waiting_h": 67.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 112366.67,
+     "waiting_h": 65.0,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 112366.67,
+     "waiting_h": 65.0,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $112,367 — 현업 Rule $255,375 대비 $143,008 절감",
+   "focus": [
+    "TIDE_UKC"
+   ],
+   "histories": {
+    "CURRENT_RULE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "FCFS": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "FCFS (도착 순) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "RATE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "체선료율 우선 (t0)",
+      "label": "체선료율 우선 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "체선료율 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "LAYTIME_RISK": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "레이타임 임박 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "OPTIMIZER": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Optimizer (완전 탐색) (t0)",
+      "label": "Optimizer (완전 탐색) 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Optimizer (완전 탐색) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ],
+    "RISK_AWARE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Risk-aware Optimizer (t0)",
+      "label": "Risk-aware Optimizer 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Risk-aware Optimizer 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 143008.32
+  },
+  {
+   "id": "S05",
+   "title": "Tank Shortage",
+   "modeled": true,
+   "desc": "원유 탱크군 A 재고 적체(초기 1,400,000 m3, 여유 500,000 m3) + CDU 감산(투입 2,600 → 2,000 m3/h). 여유가 화물 절반보다 작으면 접안 보류, 상한에 닿으면 하역 속도 = 공정 투입 속도(TANK-ULLAGE).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 327854.16,
+     "waiting_h": 109.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 315875.0,
+     "waiting_h": 106.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 429876.39,
+     "waiting_h": 147.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 315875.0,
+     "waiting_h": 106.5,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 269291.67,
+     "waiting_h": 106.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 269291.67,
+     "waiting_h": 106.5,
+     "plan_changes": 0,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $269,292 — 현업 Rule $327,854 대비 $58,562 절감",
+   "focus": [
+    "TANK_ULLAGE"
+   ],
+   "histories": {
+    "CURRENT_RULE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "FCFS": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "FCFS (도착 순) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "RATE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "체선료율 우선 (t0)",
+      "label": "체선료율 우선 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "체선료율 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "LAYTIME_RISK": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "레이타임 임박 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "OPTIMIZER": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Optimizer (완전 탐색) (t0)",
+      "label": "Optimizer (완전 탐색) 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ],
+    "RISK_AWARE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Risk-aware Optimizer (t0)",
+      "label": "Risk-aware Optimizer 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 58562.49
+  },
+  {
+   "id": "S06",
+   "title": "Pipeline Conflict",
+   "modeled": true,
+   "desc": "공유 배관을 쓰는 두 선박의 하역이 겹침 — SK3B 정비 없음(두 SBM 가용) + 공유 주배관 TL-SBM 한도 15,000 m3/h. 먼저 접안한 선박이 우선, 나중 선박은 잔여 용량(LINE-SHARED-CAP).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 133842.36,
+     "waiting_h": 37.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 133842.36,
+     "waiting_h": 37.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 247843.75,
+     "waiting_h": 78.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 133842.36,
+     "waiting_h": 37.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 92689.58,
+     "waiting_h": 34.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 92689.58,
+     "waiting_h": 34.5,
+     "plan_changes": 0,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $92,690 — 현업 Rule $133,842 대비 $41,153 절감",
+   "focus": [
+    "LINE_SHARED"
+   ],
+   "histories": {
+    "CURRENT_RULE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "FCFS": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "RATE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "체선료율 우선 (t0)",
+      "label": "체선료율 우선 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "LAYTIME_RISK": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "OPTIMIZER": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Optimizer (완전 탐색) (t0)",
+      "label": "Optimizer (완전 탐색) 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ],
+    "RISK_AWARE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Risk-aware Optimizer (t0)",
+      "label": "Risk-aware Optimizer 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 41152.78
+  },
+  {
+   "id": "S13",
+   "title": "예선·도선 부족",
+   "modeled": true,
+   "desc": "11/04 06:00~11/05 18:00 SK 배정 가능 예선 16 → 3척(11/03 12:00 통보) + SBM 계류 감독 1인 공용. VLCC·수에즈막스(4척 필요)는 그동안 접·이안 불가, 겹치는 이동은 먼저 움직이는 선박부터(MAR-TUG-REQ).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 418395.83,
+     "waiting_h": 149.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 259145.83,
+     "waiting_h": 102.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 373147.22,
+     "waiting_h": 143.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 259145.83,
+     "waiting_h": 102.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 212562.5,
+     "waiting_h": 102.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 212562.5,
+     "waiting_h": 102.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $212,562 — 현업 Rule $418,396 대비 $205,833 절감",
+   "focus": [
+    "TUG_POOL",
+    "MOORING_MASTER"
+   ],
+   "histories": {
+    "CURRENT_RULE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "FCFS": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-03T12:00",
+      "source": "FCFS (도착 순) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "RATE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "체선료율 우선 (t0)",
+      "label": "체선료율 우선 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-03T12:00",
+      "source": "체선료율 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "LAYTIME_RISK": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-03T12:00",
+      "source": "레이타임 임박 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "OPTIMIZER": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Optimizer (완전 탐색) (t0)",
+      "label": "Optimizer (완전 탐색) 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-03T12:00",
+      "source": "Optimizer (완전 탐색) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ],
+    "RISK_AWARE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Risk-aware Optimizer (t0)",
+      "label": "Risk-aware Optimizer 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-03T12:00",
+      "source": "Risk-aware Optimizer 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 205833.33
+  },
+  {
+   "id": "S14",
+   "title": "제품 전환",
+   "modeled": true,
+   "desc": "JANGSAENGPO GRACE 화물을 나프타 수입으로 바꿈 — SK8 제품 라인(경유 잔류) 치환 180분 뒤 first-foot 샘플 분석 90분이 끝나야 본 하역(PROD-CHANGEOVER·PROD-SAMPLING).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 261416.66,
+     "waiting_h": 109.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 164991.67,
+     "waiting_h": 66.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 275609.72,
+     "waiting_h": 107.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 164991.67,
+     "waiting_h": 66.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 118408.34,
+     "waiting_h": 63.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 118408.34,
+     "waiting_h": 63.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $118,408 — 현업 Rule $261,417 대비 $143,008 절감",
+   "focus": [
+    "PRODUCT_CHANGEOVER",
+    "PRODUCT_SAMPLING"
+   ],
+   "histories": {
+    "CURRENT_RULE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "FCFS": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "FCFS (도착 순) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "RATE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "체선료율 우선 (t0)",
+      "label": "체선료율 우선 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "체선료율 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "LAYTIME_RISK": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "레이타임 임박 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "OPTIMIZER": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Optimizer (완전 탐색) (t0)",
+      "label": "Optimizer (완전 탐색) 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Optimizer (완전 탐색) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ],
+    "RISK_AWARE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Risk-aware Optimizer (t0)",
+      "label": "Risk-aware Optimizer 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Risk-aware Optimizer 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 143008.32
+  },
+  {
+   "id": "S15",
+   "title": "시정 불량(안개)",
+   "modeled": true,
+   "desc": "11/03 13~20시 시정 1 km 미만(10:00 안개 주의보) — 위험물 운반선 접·이안 통제(ULS-FOG-CLOSURE). 하역은 계속된다.",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 334138.88,
+     "waiting_h": 143.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 237713.89,
+     "waiting_h": 100.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 269326.39,
+     "waiting_h": 107.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 237713.89,
+     "waiting_h": 100.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 191130.56,
+     "waiting_h": 97.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 191130.56,
+     "waiting_h": 97.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $191,131 — 현업 Rule $334,139 대비 $143,008 절감",
+   "focus": [
+    "FOG_CLOSURE"
+   ],
+   "histories": {
+    "CURRENT_RULE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "FCFS": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "FCFS (도착 순) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "RATE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "체선료율 우선 (t0)",
+      "label": "체선료율 우선 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "체선료율 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "LAYTIME_RISK": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "레이타임 임박 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "OPTIMIZER": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Optimizer (완전 탐색) (t0)",
+      "label": "Optimizer (완전 탐색) 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Optimizer (완전 탐색) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ],
+    "RISK_AWARE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Risk-aware Optimizer (t0)",
+      "label": "Risk-aware Optimizer 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Risk-aware Optimizer 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 143008.32
+  },
+  {
+   "id": "S16",
+   "title": "선박 검사·승인 대기",
+   "modeled": true,
+   "desc": "TAEHWA HARMONY 승인(Vetting) 보류 — 11/03 05:00 통보로 승인 예정 06:00 → 13:00. 승인 전 입항 이동 불가(VET-CLEARANCE). SK 측 승인 지연이라 대기는 레이타임 산입.",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 447145.83,
+     "waiting_h": 156.5,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 184075.0,
+     "waiting_h": 89.5,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 298076.39,
+     "waiting_h": 130.5,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 184075.0,
+     "waiting_h": 89.5,
+     "plan_changes": 3,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 159325.0,
+     "waiting_h": 75.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 159325.0,
+     "waiting_h": 75.0,
+     "plan_changes": 2,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $159,325 — 현업 Rule $447,146 대비 $287,821 절감",
+   "focus": [
+    "VETTING"
+   ],
+   "histories": {
+    "CURRENT_RULE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "FCFS": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T08:00",
+      "source": "FCFS (도착 순) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 3,
+      "effective_from": "2026-11-04T10:00",
+      "source": "FCFS (도착 순) 재계획",
+      "label": "BANGEOJIN TRADER: SK3B #1 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "RATE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "체선료율 우선 (t0)",
+      "label": "체선료율 우선 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T08:00",
+      "source": "체선료율 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 3,
+      "effective_from": "2026-11-04T10:00",
+      "source": "체선료율 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK3B #1 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "LAYTIME_RISK": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T08:00",
+      "source": "레이타임 임박 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 3,
+      "effective_from": "2026-11-04T10:00",
+      "source": "레이타임 임박 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK3B #1 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "OPTIMIZER": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Optimizer (완전 탐색) (t0)",
+      "label": "Optimizer (완전 탐색) 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Optimizer (완전 탐색) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ],
+    "RISK_AWARE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Risk-aware Optimizer (t0)",
+      "label": "Risk-aware Optimizer 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Risk-aware Optimizer 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 287820.83
+  },
+  {
+   "id": "S17",
+   "title": "너울 유입(파고)",
+   "modeled": true,
+   "desc": "폭풍 뒤 너울 +1.4 m가 11/05 06~17시 유입(11/04 20:00 예보). SBM 유의파고 2.5 m 이상 계류 불가·3.0 m 이상 하역 중단(ULS-WAVE-LIMIT).",
+   "results": [
+    {
+     "policy": "CURRENT_RULE",
+     "label": "현업 Rule (SEAGATE v1 유지)",
+     "total_usd": 266333.33,
+     "waiting_h": 111.0,
+     "plan_changes": 0,
+     "violations": 0
+    },
+    {
+     "policy": "FCFS",
+     "label": "FCFS (도착 순)",
+     "total_usd": 169908.33,
+     "waiting_h": 70.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "RATE",
+     "label": "체선료율 우선",
+     "total_usd": 283909.72,
+     "waiting_h": 111.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "LAYTIME_RISK",
+     "label": "레이타임 임박 우선",
+     "total_usd": 169908.33,
+     "waiting_h": 70.0,
+     "plan_changes": 2,
+     "violations": 0
+    },
+    {
+     "policy": "OPTIMIZER",
+     "label": "Optimizer (완전 탐색)",
+     "total_usd": 118325.0,
+     "waiting_h": 67.5,
+     "plan_changes": 1,
+     "violations": 0
+    },
+    {
+     "policy": "RISK_AWARE",
+     "label": "Risk-aware Optimizer",
+     "total_usd": 118325.0,
+     "waiting_h": 67.5,
+     "plan_changes": 1,
+     "violations": 0
+    }
+   ],
+   "note": "최선 Optimizer (완전 탐색) $118,325 — 현업 Rule $266,333 대비 $148,008 절감",
+   "focus": [
+    "WAVE_LIMIT"
+   ],
+   "histories": {
+    "CURRENT_RULE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "FCFS": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "FCFS (도착 순) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "RATE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "체선료율 우선 (t0)",
+      "label": "체선료율 우선 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "체선료율 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0104",
+         "ULS-2026-11-0103"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "LAYTIME_RISK": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "SEAGATE Berthing Schedule v1 (현업 Rule)",
+      "label": "기준 계획 (현업 Rule)",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "레이타임 임박 우선 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK2B #2; MUNSU PEARL: SK2B #2 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0102"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": []
+      }
+     }
+    ],
+    "OPTIMIZER": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Optimizer (완전 탐색) (t0)",
+      "label": "Optimizer (완전 탐색) 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Optimizer (완전 탐색) 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ],
+    "RISK_AWARE": [
+     {
+      "version": 1,
+      "effective_from": "2026-11-03T00:00",
+      "source": "Risk-aware Optimizer (t0)",
+      "label": "Risk-aware Optimizer 초기 계획",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102",
+         "ULS-2026-11-0105"
+        ],
+        "SK3B": [],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     },
+     {
+      "version": 2,
+      "effective_from": "2026-11-04T10:00",
+      "source": "Risk-aware Optimizer 재계획",
+      "label": "BANGEOJIN TRADER: SK2B #3 → SK3B #1",
+      "plan": {
+       "sequence": {
+        "SK2B": [
+         "ULS-2026-11-0101",
+         "ULS-2026-11-0102"
+        ],
+        "SK3B": [
+         "ULS-2026-11-0105"
+        ],
+        "SK8": [
+         "ULS-2026-11-0103",
+         "ULS-2026-11-0104"
+        ],
+        "SK7": [
+         "ULS-2026-11-0106"
+        ]
+       },
+       "levers": [
+        {
+         "id": "LV-TK104",
+         "call_id": "ULS-2026-11-0101",
+         "shore_rate_m3h": 12000,
+         "effective_from": "2026-11-04T08:00"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "best_policy": "OPTIMIZER",
+   "saving_vs_rule_usd": 148008.33
+  }
+ ],
+ "sensitivity": {
+  "policy": "OPTIMIZER",
+  "label": "Optimizer (완전 탐색)",
+  "at": "2026-11-04T08:00",
+  "base_usd": 185979.16,
+  "chosen_plan": "직전 계획 유지",
+  "factors": [
+   {
+    "factor": "ETA",
+    "label": "도착 전 선박 ETA 오차 (2척)",
+    "levels": [
+     {
+      "label": "-6h",
+      "usd": 218166.66,
+      "flip": false,
+      "best_usd": 218166.66,
+      "best_change": ""
+     },
+     {
+      "label": "-3h",
+      "usd": 202979.16,
+      "flip": false,
+      "best_usd": 202979.16,
+      "best_change": ""
+     },
+     {
+      "label": "-1h",
+      "usd": 191645.83,
+      "flip": false,
+      "best_usd": 191645.83,
+      "best_change": ""
+     },
+     {
+      "label": "+1h",
+      "usd": 180312.5,
+      "flip": false,
+      "best_usd": 180312.5,
+      "best_change": ""
+     },
+     {
+      "label": "+3h",
+      "usd": 168979.16,
+      "flip": false,
+      "best_usd": 168979.16,
+      "best_change": ""
+     },
+     {
+      "label": "+6h",
+      "usd": 158383.33,
+      "flip": false,
+      "best_usd": 158383.33,
+      "best_change": ""
+     }
+    ],
+    "swing_usd": 59783.33
+   },
+   {
+    "factor": "OPS_RATE",
+    "label": "하역 속도(펌프·육상 수용률·배관 한도)",
+    "levels": [
+     {
+      "label": "-20%",
+      "usd": 513588.89,
+      "flip": true,
+      "best_usd": 451838.89,
+      "best_change": "BANGEOJIN TRADER: SK2B #3 → SK3B #1"
+     },
+     {
+      "label": "-10%",
+      "usd": 277046.53,
+      "flip": false,
+      "best_usd": 277046.53,
+      "best_change": ""
+     },
+     {
+      "label": "+10%",
+      "usd": 165092.36,
+      "flip": false,
+      "best_usd": 165092.36,
+      "best_change": ""
+     },
+     {
+      "label": "+20%",
+      "usd": 147695.84,
+      "flip": false,
+      "best_usd": 147695.84,
+      "best_change": ""
+     }
+    ],
+    "swing_usd": 365893.05
+   },
+   {
+    "factor": "WEATHER",
+    "label": "폭풍 종료 시각",
+    "levels": [
+     {
+      "label": "-6h",
+      "usd": 158716.66,
+      "flip": false,
+      "best_usd": 158716.66,
+      "best_change": ""
+     },
+     {
+      "label": "-3h",
+      "usd": 164354.16,
+      "flip": false,
+      "best_usd": 164354.16,
+      "best_change": ""
+     },
+     {
+      "label": "+3h",
+      "usd": 207604.16,
+      "flip": false,
+      "best_usd": 207604.16,
+      "best_change": ""
+     },
+     {
+      "label": "+6h",
+      "usd": 383895.83,
+      "flip": true,
+      "best_usd": 322145.83,
+      "best_change": "BANGEOJIN TRADER: SK2B #3 → SK3B #1"
+     }
+    ],
+    "swing_usd": 225179.17
+   },
+   {
+    "factor": "TANK",
+    "label": "육상 탱크 수용률",
+    "levels": [
+     {
+      "label": "−20%",
+      "usd": 505452.78,
+      "flip": true,
+      "best_usd": 443702.78,
+      "best_change": "BANGEOJIN TRADER: SK2B #3 → SK3B #1"
+     }
+    ],
+    "swing_usd": 319473.62
+   },
+   {
+    "factor": "RATE",
+    "label": "체선료율 (일괄)",
+    "levels": [
+     {
+      "label": "-20%",
+      "usd": 148783.34,
+      "flip": false,
+      "best_usd": 148783.34,
+      "best_change": ""
+     },
+     {
+      "label": "+20%",
+      "usd": 223175.0,
+      "flip": false,
+      "best_usd": 223175.0,
+      "best_change": ""
+     }
+    ],
+    "swing_usd": 74391.66
+   }
+  ],
+  "most_sensitive": "하역 속도(펌프·육상 수용률·배관 한도) — 체선료 변동 폭 $365,893",
+  "keep_plan_within": "같은 계획이 최적으로 유지: 도착 전 선박 ETA 오차 (2척) -6h~+6h; 체선료율 (일괄) -20%~+20% | 최적안이 바뀌는 지점: 하역 속도(펌프·육상 수용률·배관 한도) -20%; 폭풍 종료 시각 +6h; 육상 탱크 수용률 −20% — 이때는 재최적화가 필요하다"
+ },
+ "runtime_s": 5.9,
+ "fingerprint": "a48c8403f7e6f1c9"
+}

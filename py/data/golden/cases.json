@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "description": "Golden Set — docs/domain/04-worked-examples.md의 TC-01~05를 그대로 옮긴 입력과 정답. sof_text는 문서 표를 복사한 것이고, 엔진은 이 텍스트를 파싱해 계산한다.",
+    "base_date": "2026-11-03",
+    "note": "expected.alternatives 중 'engine_derived'로 표시한 값은 문서에 없고 엔진이 쟁점 대안으로 추가 계산한 값이다."
+  },
+  "cases": [
+    {
+      "id": "TC-01",
+      "title": "SBM 야간 계류 금지로 대기했지만 체선료 없음",
+      "vessel": "HANRIVER STAR (가상) · VLCC 300,000 DWT · SK2 Buoy(SBM)",
+      "sof_text": "| D1 02:00 | 묘박지 도착, 투묘 |\n| D1 02:30 | NOR 제출·수령 |\n| D1 06:00 | 양묘, SBM으로 이동 시작 (주간 계류를 위해 대기 후 이동) |\n| D1 08:00 | 계류 완료 (finished mooring = all fast) |\n| D1 08:30 | 통지시간 만료 (NOR+6h) |\n| D1 09:00 | 호스 연결 |\n| D1 09:30 | 양하 개시 |\n| D2 18:30 | 양하 완료 (33h) |\n| D2 19:30 | 호스 분리 |\n| D2 20:30 | 서류 완료, 이안 |",
+      "terms": {"laytime_hours": 36, "notice_hours": 6, "rate_usd_day": 120000, "operation": "DISCHARGE", "form": "ASBATANKVOY"},
+      "context": {"berth_id": "SK2B", "daytime_rule": true, "berth_free_on_arrival": true},
+      "expected": {"laytime_start": "D1 08:00", "used_h": 35.5, "demurrage_h": 0, "amount_usd": 0, "flags": ["LOW_MARGIN"]}
+    },
+    {
+      "id": "TC-01b",
+      "title": "변형 — NOR이 전날 밤 제출되어 야간 대기가 체선료가 됨",
+      "vessel": "HANRIVER STAR (가상) · VLCC · SK2 Buoy(SBM)",
+      "sof_text": "| D0 19:30 | 묘박지 도착, 투묘 |\n| D0 20:00 | NOR 제출·수령 |\n| D1 06:00 | 양묘, SBM으로 이동 시작 |\n| D1 08:00 | 계류 완료 |\n| D1 09:00 | 호스 연결 |\n| D1 09:30 | 양하 개시 |\n| D2 18:30 | 양하 완료 |\n| D2 19:30 | 호스 분리 |\n| D2 20:30 | 서류 완료, 이안 |",
+      "terms": {"laytime_hours": 36, "notice_hours": 6, "rate_usd_day": 120000, "operation": "DISCHARGE", "form": "ASBATANKVOY"},
+      "context": {"berth_id": "SK2B", "daytime_rule": true, "berth_free_on_arrival": true},
+      "expected": {"laytime_start": "D1 02:00", "used_h": 39.5, "demurrage_h": 3.5, "amount_usd": 17500, "flags": ["WAIT_NIGHT_WEATHER"],
+                   "alternatives": {"CHTR_CL6_EXC": {"amount_usd": 0, "engine_derived": true}}}
+    },
+    {
+      "id": "TC-02",
+      "title": "선석 점유 대기 후 체선, 이동 시간 공제",
+      "vessel": "DONGHAE PIONEER (가상) · Aframax 105,000 DWT · SK8",
+      "sof_text": "| D1 14:00 | 묘박지 도착, NOR 제출·수령 |\n| D1 20:00 | 통지시간 만료 → 레이타임 개시 (선석 점유 중) |\n| D2 06:30 | 도선사 승선, 양묘, 이동 시작 |\n| D2 08:00 | 접안 완료 (all fast, 주간) |\n| D2 09:00 | 호스 연결 |\n| D2 09:30 | 양하 개시 |\n| D3 05:30 | 양하 완료 (20h) |\n| D3 06:30 | 호스 분리 |",
+      "terms": {"laytime_hours": 30, "notice_hours": 6, "rate_usd_day": 55000, "operation": "DISCHARGE", "form": "ASBATANKVOY"},
+      "context": {"berth_id": "SK8", "daytime_rule": true, "berth_occupied_until": "D2 06:00"},
+      "expected": {"laytime_start": "D1 20:00", "used_h": 33.0, "demurrage_h": 3.0, "amount_usd": 6875, "flags": [], "no_flags": ["WAIT_NIGHT_WEATHER", "SHIFT_DURING_DEMURRAGE"]}
+    },
+    {
+      "id": "TC-03",
+      "title": "묘박지에서 체선 돌입, 체선 중 이동, 기상 중단 반액",
+      "vessel": "ULSAN GLORY (가상) · VLCC 310,000 DWT · SK2 Buoy(SBM)",
+      "sof_text": "| D1 10:00 | 묘박지 도착, NOR 제출·수령 |\n| D1 16:00 | 통지시간 만료 → 레이타임 개시 (대기) |\n| D2 19:00 | 앞 선박 이안. 야간이라 계류 불가, 계속 대기 |\n| D3 04:00 | 허용 레이타임 36h 소진 → **체선 개시 (묘박지에서)** |\n| D3 07:00 | 양묘, SBM 이동 시작 |\n| D3 09:00 | 계류 완료 |\n| D3 10:00 | 호스 연결 |\n| D3 10:30 | 양하 개시 |\n| D3 22:00 | 강풍으로 터미널 지시에 따라 양하 중단 |\n| D4 04:00 | 양하 재개 (중단 6h) |\n| D4 19:30 | 양하 완료 (실작업 27h) |\n| D4 20:30 | 호스 분리 |",
+      "terms": {"laytime_hours": 36, "notice_hours": 6, "rate_usd_day": 120000, "operation": "DISCHARGE", "form": "ASBATANKVOY"},
+      "context": {"berth_id": "SK2B", "daytime_rule": true},
+      "expected": {"laytime_start": "D1 16:00", "demurrage_start": "D3 04:00", "demurrage_h": 40.5, "full_h": 34.5, "half_h": 6.0, "amount_usd": 187500,
+                   "flags": ["SHIFT_DURING_DEMURRAGE", "WAIT_NIGHT_WEATHER"],
+                   "alternatives": {"CHTR_SHIFT_EXCL": {"amount_usd": 177500}, "CHTR_CL6_EXC": {"amount_usd": 122500, "engine_derived": true}}}
+    },
+    {
+      "id": "TC-04",
+      "title": "펌핑 워런티 미달로 선주 측 공제, 체선료 소멸",
+      "vessel": "PACIFIC MERIDIAN (가상) · Aframax 100,000 DWT · SK7",
+      "sof_text": "| D1 06:00 | 묘박지 도착, NOR 제출·수령. 선석 비어 있음 |\n| D1 06:30 | 양묘, 이동 |\n| D1 08:00 | 접안 완료 (주간) |\n| D1 09:00 | 호스 연결 |\n| D1 09:30 | 양하 개시 |\n| D2 16:30 | 양하 완료 (31h). 펌핑 로그: 평균 매니폴드 압력 60 psi, 육상 배압 제한 없음 |\n| D2 17:30 | 호스 분리 |",
+      "terms": {"laytime_hours": 30, "notice_hours": 6, "rate_usd_day": 50000, "operation": "DISCHARGE", "form": "ASBATANKVOY", "pumping_warranty_hours": 24, "pumping_warranty_psi": 100},
+      "context": {"berth_id": "SK7", "daytime_rule": true},
+      "expected": {"laytime_start": "D1 08:00", "used_h": 26.5, "demurrage_h": 0, "amount_usd": 0, "pumping_excess_h": 7.0, "flags": ["PUMPING_EXCESS_DEDUCTED"],
+                   "alternatives": {"OWNER_NO_PUMPING": {"amount_usd": 7291.67}}}
+    },
+    {
+      "id": "TC-05",
+      "title": "조기 NOR(무효)과 개시 시점 분쟁",
+      "vessel": "GEOJE SPIRIT (가상) · MR 48,000 DWT · SK7",
+      "sof_text": "| D1 11:00 | NOR 송신 (항해 중, 항계 밖) |\n| D1 13:00 | 묘박지 도착, 투묘 |\n| D2 06:00 | 양묘, 이동 |\n| D2 07:30 | 접안 완료 (주간) |\n| D2 08:30 | 호스 연결 |\n| D2 09:00 | 양하 개시 |\n| D2 21:00 | 양하 완료 (12h) |\n| D2 22:00 | 호스 분리 |",
+      "terms": {"laytime_hours": 24, "notice_hours": 6, "rate_usd_day": 26000, "operation": "DISCHARGE", "form": "ASBATANKVOY"},
+      "context": {"berth_id": "SK7", "daytime_rule": true, "nor_receipt": "RECEIVED"},
+      "expected": {"laytime_start": "D2 09:00", "used_h": 13.0, "demurrage_h": 0, "amount_usd": 0, "flags": ["NOR_EARLY", "WAIVER_RISK"],
+                   "alternatives": {"OWNER_NOR_VALID": {"amount_usd": 3791.67}}}
+    }
+  ]
+}

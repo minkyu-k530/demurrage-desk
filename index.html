@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>체선료 데스크</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css?v=877f380ba121">
+<link rel="stylesheet" href="concepts.css?v=877f380ba121">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="name">체선료 데스크 <span>·</span> Demurrage Desk</div>
+    <div class="sub"><span class="badge syn">프로토타입 · 가상 데이터</span><span class="badge plan" id="planChip">계획 v1</span></div>
+  </div>
+  <div class="clockbox">
+    <div class="time mono" id="clock">--/-- --:--<small>KST</small></div>
+    <div class="controls">
+      <button class="btn icon" id="btnPrev" title="이전 정보 이벤트" aria-label="이전 정보 이벤트">◀</button>
+      <button class="btn icon" id="btnPlay" title="재생 (승인 필요 항목에서 자동 정지)" aria-label="재생">▶ 재생</button>
+      <button class="btn icon" id="btnNext" title="다음 정보 이벤트" aria-label="다음 정보 이벤트">▶</button>
+    </div>
+    <div class="slider-wrap">
+      <input type="range" id="slider" min="0" max="100" step="1" value="0" aria-label="시나리오 시각">
+      <div class="ticks" id="ticks" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="right">
+    <button class="btn small primary" id="btnTour" title="화면을 차례로 따라가며 사용법을 안내합니다">사용법 투어</button>
+    <button class="btn small" id="btnTheme" title="밝게/어둡게">테마</button>
+    <button class="btn small danger" id="btnReset" title="결정과 계획 버전을 처음 상태로">초기화</button>
+  </div>
+</header>
+<div class="staticbar hidden" id="staticBar" role="note">SKALA 교육 프로젝트 프로토타입 · 모든 선박·계약·수치는 가상 데이터 · SK에너지/SEAGATE 공식 시스템과 무관</div>
+<div id="banner"></div>
+<div class="shell">
+  <nav class="sidenav" id="nav" aria-label="화면">
+    <div class="navgroup">시작하기</div>
+    <button class="navbtn" data-tab="concepts">개념</button>
+    <button class="navbtn" data-tab="usage">사용법</button>
+    <div class="navgroup">Discovery·진단</div>
+    <button class="navbtn" data-tab="discovery">로드맵</button>
+    <button class="navbtn" data-tab="diagnosis">진단</button>
+    <button class="navbtn" data-tab="casestudy">사례 복원</button>
+    <div class="navgroup">에이전트 운영</div>
+    <button class="navbtn" data-tab="inbox">작업함 <span class="count hidden" id="navCount">0</span></button>
+    <button class="navbtn" data-tab="timeline">타임라인</button>
+    <button class="navbtn" data-tab="resources">자원·제약</button>
+    <button class="navbtn" data-tab="statement">계산서</button>
+    <button class="navbtn" data-tab="intake">입력·계산기</button>
+    <div class="navgroup">검증·사업성</div>
+    <button class="navbtn" data-tab="validation">검증</button>
+    <button class="navbtn" data-tab="benchmark">벤치마크</button>
+    <button class="navbtn" data-tab="business">비즈니스 케이스</button>
+    <button class="navbtn" data-tab="assurance">도입 검증</button>
+    <div class="navgroup">근거</div>
+    <button class="navbtn" data-tab="rules">룰·근거</button>
+    <button class="navbtn" data-tab="audit">감사 로그</button>
+    <button class="navbtn" data-tab="guide">작동 원리</button>
+    <div class="navnote">숫자 계산은 결정론적 엔진, 문장은 템플릿 초안. 확정은 사람이 한다.</div>
+  </nav>
+  <main id="main" aria-live="polite"></main>
+</div>
+<aside class="drawer" id="drawer" aria-label="선박 상세"></aside>
+<div class="popover" id="popover" role="dialog"></div>
+<div class="boot hidden" id="bootOverlay" role="status" aria-live="polite">
+  <div class="box"><div class="spinner" aria-hidden="true"></div><div class="msg">Python 엔진을 브라우저에 올리는 중… (처음 한 번 10~30초)</div><div class="sub" id="bootSub"></div>
+    <div class="note">서버 없이 같은 계산 엔진(Python)을 브라우저 안에서 실행합니다. 두 번째부터는 캐시로 빨라집니다.</div></div>
+</div>
+<script src="concepts.js?v=877f380ba121"></script>
+<script>window.DESK_STATIC=true;</script><script src="bridge.js?v=877f380ba121"></script>
+<script src="app.js?v=877f380ba121"></script>
+</body>
+</html>

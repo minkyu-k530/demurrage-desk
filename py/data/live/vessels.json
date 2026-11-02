@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "source": "SEAGATE Ship Particulars / Q88 필드 일부. 전부 가상 선박이며 IMO 번호는 체크섬이 맞지 않게 만든 가짜다(실제 선박과 겹치지 않게).",
+    "synthetic": true
+  },
+  "vessels": [
+    {"id": "V1", "imo": "9901016", "name": "TAEHWA HARMONY", "type": "VLCC", "dwt": 300000, "gt": 160200, "loa_m": 333, "beam_m": 60, "draft_m": 20.8, "pump_m3h": 15000, "flag": "Marshall Is. (가상)"},
+    {"id": "V2", "imo": "9901028", "name": "MUNSU PEARL", "type": "VLCC", "dwt": 310000, "gt": 162500, "loa_m": 333, "beam_m": 60, "draft_m": 21.0, "pump_m3h": 15000, "flag": "Liberia (가상)"},
+    {"id": "V3", "imo": "9901030", "name": "GANJEOLGOT DAWN", "type": "Aframax", "dwt": 105000, "gt": 58100, "loa_m": 244, "beam_m": 42, "draft_m": 14.4, "pump_m3h": 9000, "flag": "Korea (가상)"},
+    {"id": "V4", "imo": "9901042", "name": "JANGSAENGPO GRACE", "type": "Aframax", "dwt": 115000, "gt": 62300, "loa_m": 250, "beam_m": 44, "draft_m": 14.8, "pump_m3h": 9000, "flag": "Panama (가상)"},
+    {"id": "V5", "imo": "9901054", "name": "BANGEOJIN TRADER", "type": "Suezmax", "dwt": 158000, "gt": 81500, "loa_m": 274, "beam_m": 48, "draft_m": 16.9, "pump_m3h": 12000, "flag": "Greece (가상)"},
+    {"id": "V6", "imo": "9901066", "name": "GANGDONG BREEZE", "type": "MR", "dwt": 49000, "gt": 29400, "loa_m": 183, "beam_m": 32, "draft_m": 6.8, "pump_m3h": 4000, "flag": "Singapore (가상)"}
+  ]
+}

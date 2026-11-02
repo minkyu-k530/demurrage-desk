@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "description": "Phase 19 Solution Option Design — Option A~E를 9개 기준(질문 DQ-316~324)으로 비교. 점수(1~5)는 [가정] 평가이고, computed는 엔진이 가상 사례로 계산한 값(VIRTUAL)이다.",
+    "policy_map": "A=CURRENT_RULE(결정 방식은 그대로, 기록·절차만 표준화) · B=FCFS/RATE/LAYTIME_RISK 중 최선 · C=OPTIMIZER · D=RISK_AWARE · E=AGENT_HITL",
+    "updated": "2026-11-02"
+  },
+  "criteria": [
+    {"key": "root_cause", "label": "Root Cause를 해결하는가", "question": "DQ-316"},
+    {"key": "cost_effect", "label": "비용효과가 있는가", "question": "DQ-317"},
+    {"key": "data_ready", "label": "필요한 데이터가 있는가", "question": "DQ-318"},
+    {"key": "workflow_fit", "label": "현업 Workflow에 들어갈 수 있는가", "question": "DQ-319"},
+    {"key": "replan", "label": "재계획이 가능한가", "question": "DQ-320"},
+    {"key": "explainable", "label": "설명 가능한가", "question": "DQ-321"},
+    {"key": "safety", "label": "Safety Constraint를 처리할 수 있는가", "question": "DQ-322"},
+    {"key": "build_time", "label": "개발기간 내 구현 가능한가", "question": "DQ-323"},
+    {"key": "extensible", "label": "향후 확장 가능한가", "question": "DQ-324"}
+  ],
+  "options": [
+    {"id": "A", "label": "현행 + Process Standardization", "policies": ["CURRENT_RULE"],
+     "scores": {
+       "root_cause": {"score": 2, "rationale": "[추론] NOR·SOF 기록을 표준화하면 클레임 오류는 줄지만, 비용 1위 원인(선석 점유 대기)의 결정은 그대로다"},
+       "cost_effect": {"score": 2, "rationale": "[가상] 결정이 바뀌지 않아 선석 쪽 절감은 0 — 클레임 재계산 차이만 줄일 수 있다"},
+       "data_ready": {"score": 5, "rationale": "[가정] 지금 있는 SEAGATE·메일 자료로 가능"},
+       "workflow_fit": {"score": 5, "rationale": "[가정] 기존 업무 그대로"},
+       "replan": {"score": 1, "rationale": "[가정] 재계획 절차 자체가 없다(현업 Rule 가정)"},
+       "explainable": {"score": 5, "rationale": "[가정] 사람이 직접 정하므로 설명이 쉽다"},
+       "safety": {"score": 5, "rationale": "[가정] 기존 안전 절차를 바꾸지 않는다"},
+       "build_time": {"score": 5, "rationale": "[가정] 양식·절차 정비 수준"},
+       "extensible": {"score": 2, "rationale": "[추론] 데이터가 쌓이는 효과 외에는 확장 여지가 작다"}}},
+    {"id": "B", "label": "Rule-based Scheduling", "policies": ["FCFS", "RATE", "LAYTIME_RISK"],
+     "scores": {
+       "root_cause": {"score": 2, "rationale": "[추론] 순서 규칙만 바꿔서는 탱크 수용률·기상 연쇄를 다루지 못한다"},
+       "cost_effect": {"score": 3, "rationale": "[가상] 도착 순·레이타임 임박 우선은 줄였지만, 요율 우선은 오히려 늘었다 — 규칙 선택에 따라 들쭉날쭉"},
+       "data_ready": {"score": 4, "rationale": "[가정] ETA·요율·레이타임만 있으면 된다(계약 조건 입력 필요)"},
+       "workflow_fit": {"score": 4, "rationale": "[가정] 담당자가 이해하기 쉬운 규칙"},
+       "replan": {"score": 3, "rationale": "[가상] 결정 시점마다 규칙을 다시 적용할 수 있다"},
+       "explainable": {"score": 5, "rationale": "[가정] 규칙 한 줄로 설명된다"},
+       "safety": {"score": 4, "rationale": "[가상] Hard 제약은 시뮬레이터가 지킨다 — 규칙 자체는 안전을 모른다"},
+       "build_time": {"score": 5, "rationale": "[가정] 수 주"},
+       "extensible": {"score": 2, "rationale": "[추론] 제약이 늘수록 규칙 간 충돌이 커진다"}}},
+    {"id": "C", "label": "Optimization", "policies": ["OPTIMIZER"],
+     "scores": {
+       "root_cause": {"score": 4, "rationale": "[가상] 선석·순서·탱크 레버를 한 번에 비교 — 대기와 하역 지연을 함께 다룬다"},
+       "cost_effect": {"score": 5, "rationale": "[가상] 가상 사례에서 가장 낮은 체선료"},
+       "data_ready": {"score": 2, "rationale": "[가정] 탱크 가용·계약 조건·예보·부두제약 데이터가 모두 있어야 한다"},
+       "workflow_fit": {"score": 2, "rationale": "[추론] 결과만 나오면 설명·조율은 사람 몫(가설 H5) — SEAGATE Berth Optimization과 겹친다"},
+       "replan": {"score": 4, "rationale": "[가상] 결정 시점마다 다시 최적화"},
+       "explainable": {"score": 2, "rationale": "[추론] 왜 그 안인지 별도 설명 장치가 없으면 블랙박스"},
+       "safety": {"score": 4, "rationale": "[가상] Hard 제약 위반 0건 — 단, 모델에 없는 제약은 모른다"},
+       "build_time": {"score": 3, "rationale": "[가정] 실규모는 CP-SAT 등 솔버 교체가 필요"},
+       "extensible": {"score": 4, "rationale": "[추론] 제약·결정변수 추가로 확장"}}},
+    {"id": "D", "label": "Optimization + Simulation", "policies": ["RISK_AWARE"],
+     "scores": {
+       "root_cause": {"score": 4, "rationale": "[가상] C와 같은 결정 + ETA·기상 오차 시나리오"},
+       "cost_effect": {"score": 5, "rationale": "[가상] 가상 사례에서는 C와 같은 결과 — 오차가 큰 실제 데이터에서 차이가 날 수 있다"},
+       "data_ready": {"score": 2, "rationale": "[가정] 오차 분포(ETA·예보 이력)까지 필요"},
+       "workflow_fit": {"score": 2, "rationale": "[추론] 결과 해석이 C보다 어렵다"},
+       "replan": {"score": 4, "rationale": "[가상] 결정 시점마다 다시 계산"},
+       "explainable": {"score": 3, "rationale": "[가상] 시나리오별 리스크를 함께 보여 줄 수 있다"},
+       "safety": {"score": 4, "rationale": "[가상] Hard 제약 위반 0건"},
+       "build_time": {"score": 2, "rationale": "[가상] 계산량이 Optimizer의 몇 배 — 실규모에서 부담"},
+       "extensible": {"score": 4, "rationale": "[추론] 불확실성 요인 추가로 확장"}}},
+    {"id": "E", "label": "Optimization + Agent", "policies": ["AGENT_HITL"],
+     "scores": {
+       "root_cause": {"score": 4, "rationale": "[가상] 최적화 후보 + 변동 감지(트리거) — 원인별 후보를 사람이 고른다"},
+       "cost_effect": {"score": 5, "rationale": "[가상] 1순위 후보 승인만으로 Optimizer와 같은 체선료"},
+       "data_ready": {"score": 3, "rationale": "[추론] 에이전트가 NOR·SOF 같은 비정형 입력을 읽어 데이터 공백 일부를 메운다 — 계약·탱크 데이터는 여전히 필요"},
+       "workflow_fit": {"score": 4, "rationale": "[가정] SEAGATE 옆 작업함·승인·감사 로그 — 기존 결정권 유지"},
+       "replan": {"score": 5, "rationale": "[가상] ETA·예보·부두제약·SOF 이벤트마다 자동 재계산"},
+       "explainable": {"score": 4, "rationale": "[가상] 후보마다 선박별 체선료 변화·확인한 규칙·가정·스트레스 테스트를 함께 보여 준다"},
+       "safety": {"score": 4, "rationale": "[가상] 승인 없이는 계획 불변 + Hard 제약 위반 0건"},
+       "build_time": {"score": 3, "rationale": "[가정] 프로토타입 있음 — 실연동·실규모 솔버는 별도"},
+       "extensible": {"score": 5, "rationale": "[추론] 계산서·클레임·NOR까지 같은 작업함으로 확장"}}}
+  ],
+  "recommendation": "[추천] Option E(Optimization + Agent) — 단, 점수는 가정 평가이고 비용 효과는 가상 사례 1건 기준이다. 실제 사례 Replay와 Shadow Mode로 다시 평가한다.",
+  "note": "점수 1~5는 [가정] 평가(멘토 검토 전). computed는 검증 탭 정책 경쟁(가상) 값. A는 결정 방식이 그대로라 현업 Rule 값을 쓴다."
+}

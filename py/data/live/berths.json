@@ -1,0 +1,99 @@
+{
+  "_meta": {
+    "source": "SEAGATE Mooring Facilities / 울산항만공사 선석 제원(DWT·수심·길이·화물). 배관 한도·풍속 한계·정비 일정은 가정·가상",
+    "rules": [
+      "ULS-DWT-MAX",
+      "ULS-DRAFT-UKC",
+      "ULS-LOA-MAX",
+      "ULS-CARGO-TYPE",
+      "ULS-WEATHER-LIMIT",
+      "BERTH-OOS"
+    ]
+  },
+  "berths": [
+    {
+      "id": "SK2B",
+      "name": "SK2 Buoy",
+      "type": "SBM",
+      "max_dwt": 325000,
+      "depth_m": 27,
+      "length_m": null,
+      "cargo": [
+        "CRUDE"
+      ],
+      "max_rate_m3h": 12000,
+      "mooring_wind_ms": 15,
+      "ops_stop_wind_ms": 18,
+      "oos": []
+    },
+    {
+      "id": "SK3B",
+      "name": "SK3 Buoy",
+      "type": "SBM",
+      "max_dwt": 325000,
+      "depth_m": 27,
+      "length_m": null,
+      "cargo": [
+        "CRUDE"
+      ],
+      "max_rate_m3h": 12000,
+      "mooring_wind_ms": 15,
+      "ops_stop_wind_ms": 18,
+      "oos": [
+        {
+          "from": "2026-11-01T00:00",
+          "to": "2026-11-07T12:00",
+          "reason": "SBM 호스·체인 정기 점검 (가상)"
+        }
+      ]
+    },
+    {
+      "id": "SK8",
+      "name": "SK8 Pier",
+      "type": "PIER",
+      "max_dwt": 150000,
+      "depth_m": 18,
+      "length_m": 400,
+      "cargo": [
+        "CRUDE",
+        "OIL"
+      ],
+      "max_rate_m3h": 7500,
+      "mooring_wind_ms": 15,
+      "ops_stop_wind_ms": 20,
+      "oos": []
+    },
+    {
+      "id": "SK7",
+      "name": "SK7 Pier",
+      "type": "PIER",
+      "max_dwt": 130000,
+      "depth_m": 15,
+      "length_m": 370,
+      "cargo": [
+        "OIL",
+        "CHEM"
+      ],
+      "max_rate_m3h": 4000,
+      "mooring_wind_ms": 15,
+      "ops_stop_wind_ms": 20,
+      "oos": []
+    }
+  ],
+  "constraint_updates": [
+    {
+      "id": "BC-1104-10",
+      "issued_at": "2026-11-04T10:00",
+      "berth_id": "SK3B",
+      "source": "SEAGATE 부두제약관리 (가상)",
+      "oos": [
+        {
+          "from": "2026-11-01T00:00",
+          "to": "2026-11-05T07:00",
+          "reason": "SBM 정기 점검 — 조기 완료 예정"
+        }
+      ],
+      "summary": "SK3 Buoy 점검 조기 완료: 11/05 07:00부터 사용 가능"
+    }
+  ]
+}
